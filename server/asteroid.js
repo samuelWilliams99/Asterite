@@ -1,25 +1,26 @@
 const p2 = require("p2");
 
-module.export = {
-	new: Asteroid,
-	all: Asteroids
-};
+module.exports = Asteroid;
+
 
 var idCounter = 0;
 
 var Asteroids = [];
 
 function Asteroid(world, size){
+	this.world = world;
 	this.id = idCounter++;
-	this.body = new Body({
+	this.body = new p2.Body({
 		mass: 1,
 		position: [0, 0],
 		angle: 0,
 		velocity: [0, 0],
 		angularVelocity: 0
 	});
-	this.shape = generateShape(size || 30);
+	this.shapeData = generateShapeData(size || 30);
+	this.shape = generateShape(this.shapeData);
 	this.body.addShape(this.shape);
+	world.addBody(this.body);
 
 	this.powerup = null;
 
@@ -28,22 +29,48 @@ function Asteroid(world, size){
 
 Asteroid.prototype.remove = function(){
 	Asteroids.splice(Asteroids.indexOf(this), 1);
+	this.world.removeBody(this.body);
 }
 
-function generateShape(avg){
-	var len = 3 + getRandomInt(avg/6, avg/3);
+Asteroid.prototype.sendObj = function(){
+	obj = {
+		id: this.id,
+		body: {
+			mass: this.body.mass,
+			position: this.body.position,
+			angle: this.body.angle,
+			velocity: this.body.velocity,
+			angularVelocity: this.body.angularVelocity,
+		},
+		shapeData: this.shapeData,
+		powerup: this.powerup
+	};
+}
+
+function generateShape(shapeData){
+	var len = shapeData.length;
 	var radii = [];
 	var vertices = [];
 	for(var i=0; i<len; i++){
-		var ang = 360 - (i * (360/len));
+		var ang = (i * (360/len));
 		var angRad = ang * Math.PI/180;
-		var radius = getRandomInt(avg*0.8, avg*1.2);
+		var radius = shapeData[i];
 		var vertex = [radius * Math.cos(angRad), radius * Math.sin(angRad)];
 		vertices.push(vertex);
 	}
-	var shape = new Convex({vertices : vertices});
+	var shape = new p2.Convex({vertices : vertices});
 
 	return shape;
+}
+
+function generateShapeData(avg){
+	var len = 3 + getRandomInt(avg/6, avg/3);
+	var ret = [];
+	for(var i=0; i<len; i++){
+		ret.push(getRandomInt(avg*0.8, avg*1.2))
+	}
+
+	return ret;
 }
 
 function getRandomInt(min, max) {
