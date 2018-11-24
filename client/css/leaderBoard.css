@@ -1,0 +1,10 @@
+#leaderboard {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 10%;
+    text-align: center;
+    padding-top: 0.75rem;
+    margin-top: 0.2rem;
+    margin-right: 0.2rem;
+}

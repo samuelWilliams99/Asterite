@@ -16,3 +16,17 @@ function toggleLeaderBoard(){
         document.getElementById("toggle-leaderboard").innerHTML = "<";
     }
 }
+
+function updateLeaderboard(){
+    document.getElementById("toggle-leaderboard").innerHTML = ">";
+    tableString += "";
+    for(var i = 0; i < 10; i++){
+        tableString += "<tr>";
+        tableString += "<td>{$i}</td>";
+        tableString += "<td>player</td>";
+        tableString += "<td>score</td>";
+        tableString += "</tr>";
+    }
+
+    document.getElementById("leaderboard__table").innerHTML = tableString;						
+}
