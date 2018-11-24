@@ -7,10 +7,15 @@
     height: 180px;
     overflow: auto;
     min-width: 200px;
+    padding:20px;
 }
 
 #killfeed h2 {
     margin: 0;
+}
+
+#killfeed p {
+    font-size: 12px;
 }
 
 #toggle-killfeed {
