@@ -18,8 +18,12 @@ function drawObject(vertices) {
 }
 
 function renderRadar(radarSize, radarPos){
+    var scaleMult = radarSize / 4000;
     for (var key in Asteroids){
         asteroid = Asteroids[key];
-        ellipse(radarPos[0]+(asteroid.body.position[0]/radarSize), radarPos[1]+(asteroid.body.position[1]/radarSize), 2, 2);
-    };
+        var relativePosition = [asteroid.body.position[0]*scaleMult, asteroid.body.position[1]*scaleMult]
+        if (dist(0, 0, relativePosition[0], relativePosition[1]) < radarSize/2.1){
+            ellipse(radarPos[0]+relativePosition[0], radarPos[1]+relativePosition[1], 2, 2);
+        }
+    }
 }
