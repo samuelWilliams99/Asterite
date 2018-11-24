@@ -1,12 +1,11 @@
 function getTopTen() {
     const scores = [];
-    const playersToSort = players.slice(0);
     Object.keys(players).forEach(name => {
-        scores.push(players[name].score);
+        scores.push({ name, score: players[name].score });
     });
-    playersToSort.sort((a, b) => b.score - a.score);
+    scores.sort((a, b) => b.score - a.score);
 
-    return playersToSort.slice(0, 9);
+    return scores.slice(0, 9);
 }
 
 function update(leaderboard) {
