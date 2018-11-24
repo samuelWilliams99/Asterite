@@ -1,4 +1,9 @@
-gameWorld = new p2.World({gravity: [0, 0]});
+gameWorld = new p2.World({
+    gravity: [0, 0],
+    applyDamping: false,
+    applyGravity: false,
+    frictionGravity: 0
+});
 var material = new p2.Material();
 
 gameWorld.addContactMaterial(new p2.ContactMaterial(material, material, {
