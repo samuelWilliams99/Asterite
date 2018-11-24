@@ -1,6 +1,6 @@
 function getTopTen() {
     const scores = [];
-    const playersToSort = { ...players };
+    const playersToSort = players.slice(0);
     Object.keys(players).forEach(name => {
         scores.push(players[name].score);
     });
