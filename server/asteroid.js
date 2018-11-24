@@ -33,7 +33,7 @@ Asteroid.prototype.remove = function(){
 }
 
 Asteroid.prototype.sendObj = function(){
-	obj = {
+	return {
 		id: this.id,
 		body: {
 			mass: this.body.mass,
@@ -45,11 +45,11 @@ Asteroid.prototype.sendObj = function(){
 		shapeData: this.shapeData,
 		powerup: this.powerup
 	};
+	
 }
 
 function generateShape(shapeData){
 	var len = shapeData.length;
-	var radii = [];
 	var vertices = [];
 	for(var i=0; i<len; i++){
 		var ang = (i * (360/len));

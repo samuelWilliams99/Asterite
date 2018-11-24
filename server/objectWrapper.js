@@ -1,6 +1,4 @@
-module.exports = {
-	ObjectWrapper
-}
+module.exports = ObjectWrapper;
 
 const Asteroid = require("./asteroid");
 
