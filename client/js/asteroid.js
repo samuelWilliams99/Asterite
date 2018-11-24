@@ -1,4 +1,4 @@
-var Asteroids = [];
+var Asteroids = {};
 
 function Asteroid(world, asteroidData){
 	this.world = world;
@@ -22,7 +22,7 @@ function Asteroid(world, asteroidData){
 
 	this.powerup = asteroidData.powerup;
 
-	Asteroids.push(this);
+	Asteroids[this.id] = this;
 }
 
 function generateShape(shapeData){
