@@ -15,3 +15,9 @@ function drawObject(vertices) {
     }
     endShape(CLOSE);
 }
+
+function renderRadar(radarSize){
+    Asteroids.forEach(asteroid => {
+        
+    });
+}
