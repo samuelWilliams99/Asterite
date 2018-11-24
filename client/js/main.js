@@ -3,8 +3,8 @@ socket.on('leaderboardUpdate', function(scores){
 });
 
 $(function(){
-    updateLeaderboard([{name: "Time", score: "50000"}, {name: "Joshua", score: "500"}]);
-    updateKillfeed("Tim", "Joshua", "Skittles");
+    updateLeaderboard([{name: "Tim", score: "50000"}, {name: "Joshua", score: "500"}]);
+    updateKillfeed({killer: "Tim", killed: "Joshua", weapon: "Skittles"});
 });
 
 function joinGame(e){
@@ -15,15 +15,16 @@ function joinGame(e){
     socket.emit('playerJoin', name);
 }
 
-function toggleLeaderBoard(){
-    if($('#leaderboard').hasClass('hidden')){
-        $('#leaderboard').removeClass('hidden');
-        document.getElementById("span__leaderboard").innerHTML = ">";
+function togglePane(e){
+    var id = "#" + e.currentTarget.id;
+    var targetViewId = "#" + $(id).data("target-view");
+    if($(targetViewId).hasClass('hidden')){
+        $(targetViewId).removeClass('hidden');
     }else{
-        $('#leaderboard').addClass('hidden');
-        document.getElementById("span__leaderboard").innerHTML = "<";
+        $(targetViewId).addClass('hidden');
     }
 }
+
 
 function updateLeaderboard(scores){
     var tableString = "";
@@ -38,9 +39,10 @@ function updateLeaderboard(scores){
     document.getElementById("leaderboard__table").innerHTML = tableString;						
 }
 
-function updateKillfeed(killer, killed, weapon){
-    document.getElementById("killer__span").innerHTML = killer;
-    document.getElementById("killed__span").innerHTML = killed;
-    document.getElementById("weapon__span").innerHTML = weapon;
+function updateKillfeed(killObj){
+    document.getElementById("killfeed__text").innerHTML = "<span id=\"killer__span\"></span> -> <span id=\"killed__span\"></span> with <span id=\"weapon__span\"></span>";
+    document.getElementById("killer__span").innerHTML = killObj.killer;
+    document.getElementById("killed__span").innerHTML = killObj.killed;
+    document.getElementById("weapon__span").innerHTML = killObj.weapon;
 
 }
