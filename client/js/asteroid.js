@@ -8,10 +8,13 @@ function Asteroid(world, asteroidData){
 		position: asteroidData.body.position,
 		angle: asteroidData.body.angle,
 		velocity: asteroidData.body.velocity,
-		angularVelocity: asteroidData.body.angularVelocity
+        angularVelocity: asteroidData.body.angularVelocity,
+        damping: 0,
+        angularDamping: 0
 	});
 	this.shapeData = asteroidData.shapeData;
-	this.shape = generateShape(this.shapeData);
+    this.shapeVertices = generateShape(this.shapeData);
+	this.shape = new p2.Convex({vertices : this.shapeVertices});    
     this.body.addShape(this.shape);
     this.body.objectType = "Asteroid";
 	world.addBody(this.body);
@@ -31,7 +34,6 @@ function generateShape(shapeData){
 		var vertex = [radius * Math.cos(angRad), radius * Math.sin(angRad)];
 		vertices.push(vertex);
 	}
-	var shape = new p2.Convex({vertices : vertices});
 
-	return shape;
+	return vertices;
 }
