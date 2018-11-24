@@ -4,7 +4,7 @@ module.exports = Asteroid;
 
 var idCounter = 0;
 
-var Asteroids = [];
+global.Asteroids = [];
 
 function Asteroid(World, size){
 	this.World = World;
@@ -48,6 +48,19 @@ Asteroid.prototype.sendObj = function() {
             angularVelocity: this.body.angularVelocity
         },
         shapeData: this.shapeData,
+        powerup: this.powerup
+    };
+};
+
+Asteroid.prototype.sendObjSimple = function() {
+    return {
+        id: this.id,
+        body: {
+            position: this.body.position,
+            angle: this.body.angle,
+            velocity: this.body.velocity,
+            angularVelocity: this.body.angularVelocity
+        },
         powerup: this.powerup
     };
 };
