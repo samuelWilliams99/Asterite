@@ -5,6 +5,7 @@ const World = require('./world');
 
 const ObjectWrapper = require('./objectWrapper');
 const Player = require('./player');
+const Chat = require('./chat');
 
 function server() {
     var gameWorld = new World();
@@ -23,13 +24,17 @@ function server() {
             console.log(ply.color);
         });
 
-        socket.on("asteroidRequestData", function(ids){
-			console.log("asteroid request");
-			console.log(ids);
-			for(var i=0; i<ids.length; i++){
-				var ast = Asteroids[ids[i]];
-				socket.emit('asteroidCreate', ast.sendObj());
-			}
-		});
+        socket.on('asteroidRequestData', function(ids) {
+            console.log('asteroid request');
+            console.log(ids);
+            for (var i = 0; i < ids.length; i++) {
+                var ast = Asteroids[ids[i]];
+                socket.emit('asteroidCreate', ast.sendObj());
+            }
+        });
+
+        socket.on('sendMessage', function(payload) {
+            Chat.sendMessage(socket, payload);
+        });
     });
 }
