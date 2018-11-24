@@ -1,10 +1,20 @@
 #leaderboard {
-    position: fixed;
     top: 0;
     right: 0;
-    width: auto;
+    width:100%;
     padding:0.75rem;
     text-align: center;
     margin-top: 0.2rem;
     margin-right: 0.2rem;
+}
+
+#toggle-leaderboard {
+    padding-bottom: 0.8rem;
+}
+
+#span__leaderboard {
+    position:relative;
+    top: -2px;
+    right:0px;
+
 }
