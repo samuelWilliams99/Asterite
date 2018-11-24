@@ -1,3 +1,10 @@
+socket.on('leaderboardUpdate', function(scores){
+    updateLeaderboard(scores);
+});
+
+$(function(){
+    updateLeaderboard([{name: "Time", score: "50000"}, {name: "Joshua", score: "500"}]);
+});
 
 function joinGame(e){
     e.preventDefault();
@@ -10,21 +17,20 @@ function joinGame(e){
 function toggleLeaderBoard(){
     if($('#leaderboard').hasClass('hidden')){
         $('#leaderboard').removeClass('hidden');
-        document.getElementById("toggle-leaderboard").innerHTML = ">";
+        document.getElementById("span__leaderboard").innerHTML = ">";
     }else{
         $('#leaderboard').addClass('hidden');
-        document.getElementById("toggle-leaderboard").innerHTML = "<";
+        document.getElementById("span__leaderboard").innerHTML = "<";
     }
 }
 
-function updateLeaderboard(){
-    document.getElementById("toggle-leaderboard").innerHTML = ">";
-    tableString += "";
-    for(var i = 0; i < 10; i++){
+function updateLeaderboard(scores){
+    var tableString = "";
+    for(var i = 0; i < scores.length; i++){
         tableString += "<tr>";
-        tableString += "<td>" + i + "</td>";
-        tableString += "<td>player</td>";
-        tableString += "<td>score</td>";
+        tableString += "<td class=\"pos\">" + (i+1)+"." + "</td>";
+        tableString += "<td class=\"name\">" + scores[i].name + "</td>";
+        tableString += "<td class=\"score\">" + scores[i].score + "</td>";
         tableString += "</tr>";
     }
 
