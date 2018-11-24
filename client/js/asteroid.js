@@ -1,4 +1,4 @@
-var Asteroids = {};
+Asteroids = {};
 
 function Asteroid(world, asteroidData){
 	this.world = world;
