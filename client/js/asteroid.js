@@ -10,7 +10,8 @@ function Asteroid(world, asteroidData){
 		velocity: asteroidData.body.velocity,
         angularVelocity: asteroidData.body.angularVelocity,
         damping: 0,
-        angularDamping: 0
+        angularDamping: 0,
+        inertia: 150
 	});
 	this.shapeData = asteroidData.shapeData;
     this.shapeVertices = generateShape(this.shapeData);

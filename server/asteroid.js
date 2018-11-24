@@ -11,13 +11,15 @@ function Asteroid(World, size){
 	this.world = World.world;
 	this.id = idCounter++;
 	this.body = new p2.Body({
-		mass: 1,
-		position: [getRandomInt(this.World.worldSize/2-1000,this.World.worldSize/2+1000), getRandomInt(this.World.worldSize/2-500,this.World.worldSize/2+500)],
+		mass: 10,
+		//position: [getRandomInt(this.World.worldSize/2-1000,this.World.worldSize/2+1000), getRandomInt(this.World.worldSize/2-500,this.World.worldSize/2+500)],
+        position: [getRandomInt(100,1800), 500],
 		angle: 0,
-		velocity: [getRandomInt(-6,6), getRandomInt(-6,6)],
+		velocity: [getRandomInt(-6,6), 0],
 		angularVelocity: 0.2,
 		damping: 0,
-        angularDamping: 0
+        angularDamping: 0,
+        inertia: 150
 	});
 	this.shapeData = generateShapeData(size || 30);
 	this.shape = generateShape(this.shapeData);

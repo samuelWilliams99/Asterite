@@ -7,7 +7,7 @@ gameWorld = new p2.World({
 var material = new p2.Material();
 
 gameWorld.addContactMaterial(new p2.ContactMaterial(material, material, {
-    restitution: 1,
+    restitution: 0.4,
     stiffness: Number.MAX_VALUE // Infinite stiffness to get the exact restitution, according to the p2 example
 }));
 
