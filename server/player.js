@@ -9,7 +9,7 @@ function Player(name, socket) {
     this.score = 0;
     this.position = [15000, 15000];
     this.powerups = '';
-    this.color = 'red';
+    this.color = '#' + ((Math.random() * 0xffffff) << 0).toString(16);
     this.name = name;
     this.killed = false;
 
