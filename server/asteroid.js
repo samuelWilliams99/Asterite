@@ -15,7 +15,7 @@ function Asteroid(World, size){
 		position: [getRandomInt(this.World.worldSize/2-2000,this.World.worldSize/2+2000), getRandomInt(this.World.worldSize/2-2000,this.World.worldSize/2+2000)],
         //position: [getRandomInt(100,1800), 500],
 		angle: 0,
-		velocity: [0,0],//[getRandomInt(-6,6), 0],
+		velocity: [getRandomInt(-10, 10), getRandomInt(-10, 10)],
 		angularVelocity: 0.2,
 		damping: 0,
         angularDamping: 0,
