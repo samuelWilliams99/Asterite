@@ -4,7 +4,7 @@ module.exports = Asteroid;
 
 var idCounter = 0;
 
-global.Asteroids = [];
+global.Asteroids = {};
 
 function Asteroid(World, size){
 	this.World = World;
@@ -29,11 +29,11 @@ function Asteroid(World, size){
 
     this.powerup = null;
 
-    Asteroids.push(this);
+    Asteroids[this.id] = this;
 }
 
 Asteroid.prototype.remove = function() {
-    Asteroids.splice(Asteroids.indexOf(this), 1);
+    Asteroids[this.id] = null;
     this.world.removeBody(this.body);
 };
 
