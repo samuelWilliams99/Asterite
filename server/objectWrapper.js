@@ -10,3 +10,7 @@ ObjectWrapper.prototype.createAsteroid = function() {
     var ast = new Asteroid(this.gameWorld);
     io.emit('asteroidCreate', ast.sendObj());
 };
+
+ObjectWrapper.prototype.updateWorld = function(){
+	
+}

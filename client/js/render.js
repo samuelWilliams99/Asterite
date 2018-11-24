@@ -1,7 +1,7 @@
 function renderBodies(){
     Asteroids.forEach(asteroid => {
         push();
-        translate(asteroid.body.position[0], asteroid.body.position[1]);
+        translate(asteroid.body.position[0] + width/2, asteroid.body.position[1] + height/2);
         rotate(asteroid.body.angle);
         drawObject(asteroid.shapeVertices, asteroid.body.position);
         pop();
