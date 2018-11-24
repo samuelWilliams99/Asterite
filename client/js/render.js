@@ -16,8 +16,8 @@ function drawObject(vertices) {
     endShape(CLOSE);
 }
 
-function renderRadar(radarSize){
+function renderRadar(radarSize, radarPos){
+    ellipse(radarPos[0]+5, radarPos[1]+5, 5, 5);
     Asteroids.forEach(asteroid => {
-        
     });
 }
