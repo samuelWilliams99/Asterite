@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<link rel = 'stylesheet' href = './css/dialog.css' type = 'text/css'/>
+		<link rel = 'stylesheet' href = './css/killfeed.css' type = 'text/css'/>
 		<link rel = 'stylesheet' href = './css/leaderboard.css' type = 'text/css'/>
 		<link rel = 'stylesheet' href = './css/index.css' type = 'text/css'/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
@@ -25,6 +26,7 @@
     </head>
     <body>
         <div class="container">
+			
 			<div class = "dialog view" id = "player-name-dialog">
 				<div class="menu-screen">
 					<h2>Asterite</h2>
@@ -36,20 +38,31 @@
 				</div>
 			</div>
 
-			<div id = "leaderboard" class="view">
-				<h2>Leaderboard</h2>
-				<h4>Top 10</h4>
-				<div class="table">
-					<table id="leaderboard__table">
-						
-					</table>
-				</div>
-				
-			</div>
 
-			<div>
-				<button onclick="toggleLeaderBoard()" id="toggle-leaderboard" class="btn close-button">></button>
+			<div id="right-pane">
+				<div id="leaderboard-container">
+					<div id = "leaderboard" class="view">
+						<h2>Leaderboard</h2>
+						<h4>Top 10</h4>
+						<div class="table">
+							<table id="leaderboard__table">
+							</table>
+						</div>
+					</div>
+					<div>
+						<button onclick="toggleLeaderBoard()" id="toggle-leaderboard" class="btn close-button"><span id = "span__leaderboard">></span></button>
+					</div>
+				</div>
+	
+				<div id="killfeed-container">
+					<div id="killfeed" class="view">
+						<h2>Killfeed</h2>
+					</div>
+				</div>
 			</div>
+			
+
+
 				
 		
 		</div>
