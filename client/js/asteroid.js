@@ -5,7 +5,7 @@ function Asteroid(world, asteroidData){
 	this.id = asteroidData.id;
 	this.body = new p2.Body({
 		mass: asteroidData.body.mass,
-		position: asteroidData.body.position,
+		position: realToScreen(asteroidData.body.position),
 		angle: asteroidData.body.angle,
 		velocity: asteroidData.body.velocity,
         angularVelocity: asteroidData.body.angularVelocity,
