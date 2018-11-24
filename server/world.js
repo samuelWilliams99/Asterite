@@ -7,6 +7,7 @@ function World(){
         applyGravity: false,
         frictionGravity: 0
     });
+    this.worldSize = 30000;
 	this.createMaterials(new p2.Material());
 };
 

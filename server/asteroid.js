@@ -7,12 +7,13 @@ var idCounter = 0;
 
 var Asteroids = [];
 
-function Asteroid(world, size){
-	this.world = world;
+function Asteroid(World, size){
+	this.World = World;
+	this.world = World.world;
 	this.id = idCounter++;
 	this.body = new p2.Body({
 		mass: 1,
-		position: [getRandomInt(0,1920), getRandomInt(0,1080)],
+		position: [getRandomInt(this.World.worldSize/2-1000,this.World.worldSize/2+1000), getRandomInt(this.World.worldSize/2-500,this.World.worldSize/2+500)],
 		angle: 0,
 		velocity: [getRandomInt(-6,6), getRandomInt(-6,6)],
 		angularVelocity: 0.2,
@@ -22,7 +23,7 @@ function Asteroid(world, size){
 	this.shapeData = generateShapeData(size || 30);
 	this.shape = generateShape(this.shapeData);
 	this.body.addShape(this.shape);
-	world.addBody(this.body);
+	this.world.addBody(this.body);
 
 	this.powerup = null;
 
