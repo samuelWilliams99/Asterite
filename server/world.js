@@ -7,12 +7,13 @@ function World(){
         applyGravity: false,
         frictionGravity: 0
     });
+    this.worldSize = 30000;
 	this.createMaterials(new p2.Material());
 };
 
 World.prototype.createMaterials = function(material) {
     this.world.addContactMaterial(new p2.ContactMaterial(material, material, {
-        restitution: 1,
+        restitution: 0.4,
         stiffness: Number.MAX_VALUE // Infinite stiffness to get the exact restitution, according to the p2 example
     }));
 };
