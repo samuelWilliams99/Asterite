@@ -25,9 +25,8 @@ function draw(){
     lastTimeSeconds = lastTimeSeconds || timeSeconds;
     var timeSinceLastCall = timeSeconds - lastTimeSeconds;
     gameWorld.step(fixedTimeStep, timeSinceLastCall, maxSubSteps);
-    
     renderBodies();
-
+    
     ellipse(radarPos[0], radarPos[1], radarSize, radarSize);
     stroke(100, 100, 100);
     var radarCircleSize = radarSize - 20;
