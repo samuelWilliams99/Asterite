@@ -8,10 +8,11 @@ function ObjectWrapper(gameWorld) {
 
 ObjectWrapper.prototype.createAsteroid = function() {
     var ast = new Asteroid(this.gameWorld);
-    io.emit('asteroidCreate', ast.sendObj());
+    //io.emit('asteroidCreate', ast.sendObj());
 };
 
 ObjectWrapper.prototype.updateWorld = function(){
+	console.log("update");
 	io.sockets.sockets.forEach(socket => {
 		var data = {asteroids: []};
 		if(socket.name){
@@ -24,9 +25,11 @@ ObjectWrapper.prototype.updateWorld = function(){
 				data.asteroids.push(asteroid.sendObjSimple());
 			}
 		});
-		socket.emit("asteroidSync", data);
+		socket.emit("asteroidUpdate", data);
 	});
 }
+
+
 function subVec(a, b){
 	return [a[0] - b[0], a[1] - b[1]];
 }
