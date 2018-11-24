@@ -1,15 +1,15 @@
-var players = {
-
-};
+global.players = {};
 
 
-function createPlayer(name){
-    players[name] = {
-    body : '',
-    shape : '',
-    powerups : '',
-    color : 'red',
-    };
+function Player(name){
+    
+    this.body = '';
+    this.shape = '';
+    this.powerups = '';
+    this.color = 'red';
+    this.name = name;
+
+    players[name] = this;
 }
 
-module.exports = { players, createPlayer };
+module.exports = Player;

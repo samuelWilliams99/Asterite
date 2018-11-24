@@ -26,7 +26,7 @@ function Asteroid(world, size){
 	Asteroids.push(this);
 }
 
-Asteroids.prototype.remove(){
+Asteroid.prototype.remove = function(){
 	Asteroids.splice(Asteroids.indexOf(this), 1);
 }
 
