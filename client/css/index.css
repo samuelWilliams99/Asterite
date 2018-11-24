@@ -76,8 +76,6 @@ body * {
     padding: 0.375rem 0.75rem;
 }
 
-
-
 .view {
     color: #ffffff;
     box-sizing: border-box;
@@ -119,5 +117,4 @@ td {
     position:absolute;
     top:0px;
     z-index:-5;
-
 }
