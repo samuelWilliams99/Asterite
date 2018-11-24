@@ -2,10 +2,14 @@
     bottom: 0;
     right: 0;
     width: auto;
-    padding:0.75rem;
     text-align: center;
     margin-top: 0.2rem;
-    margin-right: 0.2rem;
+    height: 180px;
+    overflow: auto;
+}
+
+#killfeed h2 {
+    margin: 0;
 }
 
 #toggle-killfeed {
@@ -13,8 +17,7 @@
 }
 
 #span_killfeed {
-    position:relative;
+    position: relative;
     top: -2px;
-    right:0px;
-
+    right: 0px;
 }
