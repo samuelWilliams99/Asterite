@@ -3,7 +3,11 @@ const LEADERBOARD_LENGTH = 10;
 function getNewLeaderboard(length) {
     const scores = [];
     Object.keys(players).forEach(name => {
-        scores.push({ name, score: players[name].score });
+        scores.push({
+            name,
+            score: players[name].score,
+            color: players[name].color
+        });
     });
     scores.sort((a, b) => b.score - a.score);
 
