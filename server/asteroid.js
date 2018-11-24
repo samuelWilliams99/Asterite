@@ -12,10 +12,12 @@ function Asteroid(world, size){
 	this.id = idCounter++;
 	this.body = new p2.Body({
 		mass: 1,
-		position: [0, 0],
+		position: [getRandomInt(0,1920), getRandomInt(0,1080)],
 		angle: 0,
-		velocity: [0, 0],
-		angularVelocity: 0
+		velocity: [getRandomInt(-6,6), getRandomInt(-6,6)],
+		angularVelocity: 0.2,
+		damping: 0,
+        angularDamping: 0
 	});
 	this.shapeData = generateShapeData(size || 30);
 	this.shape = generateShape(this.shapeData);
@@ -67,7 +69,7 @@ function generateShapeData(avg){
 	var len = 3 + getRandomInt(avg/6, avg/3);
 	var ret = [];
 	for(var i=0; i<len; i++){
-		ret.push(getRandomInt(avg*0.8, avg*1.2))
+		ret.push(getRandomInt(avg*0.65, avg*1.35))
 	}
 
 	return ret;

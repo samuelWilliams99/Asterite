@@ -1,7 +1,12 @@
 const p2 = require("p2");
 
 function World(){
-	this.world = new p2.World({gravity: [0, 0]});
+	this.world = new p2.World({
+        gravity: [0, 0],
+        applyDamping: false,
+        applyGravity: false,
+        frictionGravity: 0
+    });
 	this.createMaterials(new p2.Material());
 };
 
