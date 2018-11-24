@@ -16,7 +16,7 @@ function createAsteroid(asteroidData){
 }
 
 function realToScreen(position){
-	return [position[0] - viewPos[0], position[1] - view[1]];
+	return [position[0] - viewPos[0], position[1] - viewPos[1]];
 }
 
 var viewPos = [0,0];
