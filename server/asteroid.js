@@ -12,10 +12,10 @@ function Asteroid(World, size){
 	this.id = idCounter++;
 	this.body = new p2.Body({
 		mass: 10,
-		position: [getRandomInt(this.World.worldSize/2-100,this.World.worldSize/2+100), getRandomInt(this.World.worldSize/2-50,this.World.worldSize/2+50)],
+		position: [getRandomInt(this.World.worldSize/2-2000,this.World.worldSize/2+2000), getRandomInt(this.World.worldSize/2-2000,this.World.worldSize/2+2000)],
         //position: [getRandomInt(100,1800), 500],
 		angle: 0,
-		velocity: [getRandomInt(-6,6), 0],
+		velocity: [0,0],//[getRandomInt(-6,6), 0],
 		angularVelocity: 0.2,
 		damping: 0,
         angularDamping: 0,
