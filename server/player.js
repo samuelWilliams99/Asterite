@@ -15,8 +15,7 @@ function Player(name) {
 
 Player.prototype.setScore = function(score) {
     this.score = score;
-    const topTen = Leaderboard.getTopTen();
-    Leaderboard.update(topTen);
+    Leaderboard.update();
 };
 
 module.exports = Player;
