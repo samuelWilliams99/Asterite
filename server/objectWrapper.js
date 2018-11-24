@@ -12,21 +12,23 @@ ObjectWrapper.prototype.createAsteroid = function() {
 };
 
 ObjectWrapper.prototype.updateWorld = function(){
-	console.log("update");
-	io.sockets.sockets.forEach(socket => {
+	var sockets = io.sockets.sockets
+	for(var key in sockets){
+		var socket = sockets[key];
 		var data = {asteroids: []};
 		if(socket.name){
 			data.viewPos = players[socket.name].body.position;
 		} else {
 			data.viewPos = socket.viewPos;
 		}
-		Asteroids.forEach(asteroid => {
+		for(var key in Asteroids){
+			var asteroid = Asteroids[key];
 			if(withinBox(asteroid.body.position, subVec(data.viewPos, [2000,2000]), addVec(data.viewPos, [2000,2000]))){
 				data.asteroids.push(asteroid.sendObjSimple());
 			}
-		});
+		};
 		socket.emit("asteroidUpdate", data);
-	});
+	};
 }
 
 

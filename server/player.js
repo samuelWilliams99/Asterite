@@ -21,9 +21,11 @@ Player.prototype.setScore = function(score) {
     Leaderboard.update();
 };
 
-Player.prototype.kill = function(killer) {
+Player.prototype.kill = function(killData) {
+    const { killer, weapon } = killData;
     this.killed = true;
-    io.emit('playerKilled', killer + ' killed ' + this.name);
+
+    io.emit('playerKilled', { killer, killed: this.name, weapon });
 };
 
 module.exports = Player;
