@@ -1,12 +1,10 @@
 module.exports = {
     serve: server
 };
-const p2 = require('p2');
 const World = require('./world');
 
 const ObjectWrapper = require('./objectWrapper');
 const Player = require('./player');
-const Leaderboard = require('./leaderboard');
 
 function server() {
     var gameWorld = new World();
