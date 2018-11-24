@@ -76,8 +76,6 @@ body * {
     padding: 0.375rem 0.75rem;
 }
 
-
-
 .view {
     color: #ffffff;
     box-sizing: border-box;
@@ -114,4 +112,3 @@ table {
 td {
     text-align: center;
 }
-

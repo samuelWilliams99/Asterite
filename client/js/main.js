@@ -4,6 +4,7 @@ socket.on('leaderboardUpdate', function(scores){
 
 $(function(){
     updateLeaderboard([{name: "Time", score: "50000"}, {name: "Joshua", score: "500"}]);
+    updateKillfeed("Tim", "Joshua", "Skittles");
 });
 
 function joinGame(e){
@@ -35,4 +36,11 @@ function updateLeaderboard(scores){
     }
 
     document.getElementById("leaderboard__table").innerHTML = tableString;						
+}
+
+function updateKillfeed(killer, killed, weapon){
+    document.getElementById("killer__span").innerHTML = killer;
+    document.getElementById("killed__span").innerHTML = killed;
+    document.getElementById("weapon__span").innerHTML = weapon;
+
 }
