@@ -27,7 +27,7 @@ function server() {
 	    var timeSinceLastCall = timeSeconds - lastTimeSeconds;
 	    gameWorld.world.step(fixedTimeStep, timeSinceLastCall, maxSubSteps);
     	objectWrapper.updateWorld();
-    }, fixedTimeStep);
+    }, fixedTimeStep*1000);
 
     io.on('connection', function(socket) {
         var viewPos = [gameWorld.worldSize / 2, gameWorld.worldSize / 2];

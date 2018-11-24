@@ -19,7 +19,7 @@ function createAsteroid(asteroidData){
 function updateAsteroid(asteroidData){
 	if(Asteroids[asteroidData.id]){
 		var asteroid = Asteroids[asteroidData.id];
-		asteroid.body.position = createAsteroid(asteroidData.body.position);
+		asteroid.body.position = realToScreen(asteroidData.body.position);
 		asteroid.body.angle = asteroidData.body.angle;
 		asteroid.body.velocity = asteroidData.body.velocity;
 		asteroid.body.angularVelocity = asteroidData.body.angularVelocity;
