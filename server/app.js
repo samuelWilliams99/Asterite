@@ -16,6 +16,7 @@ function server() {
 
     io.on('connection', function(socket) {
         var viewPos = [gameWorld.worldSize / 2, gameWorld.worldSize / 2];
+        socket.viewPos = viewPos;
         socket.on('playerJoin', function(name) {
             console.log('New player name \n>', name);
             var ply = new Player(name);
