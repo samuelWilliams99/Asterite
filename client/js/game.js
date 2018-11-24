@@ -12,13 +12,14 @@ gameWorld.addContactMaterial(new p2.ContactMaterial(material, material, {
 }));
 
 function createAsteroid(asteroidData){
+	if(Asteroids[asteroidData.id]){return;}
     new Asteroid(gameWorld, asteroidData);
 }
 
 function updateAsteroid(asteroidData){
 	if(Asteroids[asteroidData.id]){
 		var asteroid = Asteroids[asteroidData.id];
-		asteroid.body.position = asteroidData.body.position;
+		asteroid.body.position = createAsteroid(asteroidData.body.position);
 		asteroid.body.angle = asteroidData.body.angle;
 		asteroid.body.velocity = asteroidData.body.velocity;
 		asteroid.body.angularVelocity = asteroidData.body.angularVelocity;
