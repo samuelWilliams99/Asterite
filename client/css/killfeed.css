@@ -16,5 +16,14 @@
     position:relative;
     top: -2px;
     right:0px;
+}
 
+#weapon__span{
+    color:rgb(255, 0, 255);
+}
+#killed__span{
+    color:rgb(255, 0, 0);
+}
+#killer__span{
+    color:rgb(18, 230, 18);
 }
