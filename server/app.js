@@ -8,9 +8,9 @@ const ObjectWrapper = require('./objectWrapper');
 const Player = require('./player');
 const Leaderboard = require('./leaderboard');
 
-function server(io) {
+function server() {
     var gameWorld = new World();
-    var objectWrapper = new ObjectWrapper(gameWorld, io);
+    var objectWrapper = new ObjectWrapper(gameWorld);
 
     setInterval(function() {
         objectWrapper.createAsteroid();
@@ -23,7 +23,5 @@ function server(io) {
             var ply = new Player(name);
             console.log(ply.color);
         });
-
-        Leaderboard(socket);
     });
 }
