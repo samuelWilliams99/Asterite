@@ -1,3 +1,10 @@
+.button-bar {
+    position: relative;
+    float: right;
+    height:100%;
+    width:auto;
+}
+
 #right-pane{
     position: relative;
     float: right;
@@ -10,3 +17,5 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+
