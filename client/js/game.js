@@ -32,4 +32,4 @@ function realToScreen(position){
 	return [position[0] - viewPos[0], position[1] - viewPos[1]];
 }
 
-global.viewPos = [0,0];
+viewPos = [0,0];
