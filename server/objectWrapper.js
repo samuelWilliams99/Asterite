@@ -8,6 +8,6 @@ function ObjectWrapper(gameWorld, io){
 }
 
 ObjectWrapper.prototype.createAsteroid = function(){
-	var ast = new Asteroid(this.gameWorld.world);
+	var ast = new Asteroid(this.gameWorld);
 	this.io.emit("asteroidCreate", ast.sendObj())
 }

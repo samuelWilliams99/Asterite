@@ -3,6 +3,10 @@ var maxSubSteps;
 var fixedTimeStep;
 var lastTimeSeconds;
 
+function windowResized() {
+    resizeCanvas(window.innerWidth, window.innerHeight);
+}
+
 function setup(){
     frameRate(fr);
     maxSubSteps = 10;
