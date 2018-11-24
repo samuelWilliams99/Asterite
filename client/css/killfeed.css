@@ -1,18 +1,18 @@
-#leaderboard {
-    top: 0;
+#killfeed {
+    bottom: 0;
     right: 0;
-    width:100%;
+    width: auto;
     padding:0.75rem;
     text-align: center;
     margin-top: 0.2rem;
     margin-right: 0.2rem;
 }
 
-#toggle-leaderboard {
+#toggle-killfeed {
     padding-bottom: 0.8rem;
 }
 
-#span__leaderboard {
+#span_killfeed {
     position:relative;
     top: -2px;
     right:0px;
