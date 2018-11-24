@@ -22,5 +22,14 @@ function server() {
             var ply = new Player(name);
             console.log(ply.color);
         });
+
+        socket.on("asteroidRequestData", function(ids){
+			console.log("asteroid request");
+			console.log(ids);
+			for(var i=0; i<ids.length; i++){
+				var ast = Asteroids[ids[i]];
+				socket.emit('asteroidCreate', ast.sendObj());
+			}
+		});
     });
 }
