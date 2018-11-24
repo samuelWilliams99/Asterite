@@ -24,6 +24,7 @@ ObjectWrapper.prototype.updateWorld = function(){
 				data.asteroids.push(asteroid.sendObjSimple());
 			}
 		});
+		socket.emit("asteroidSync", data);
 	});
 }
 function subVec(a, b){
