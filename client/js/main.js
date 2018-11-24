@@ -14,5 +14,5 @@ function toggleLeaderBoard(){
     }else{
         $('#leaderboard').addClass('hidden');
         document.getElementById("toggle-leaderboard").innerHTML = "<";
-    }gi
+    }
 }
