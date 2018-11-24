@@ -1,15 +1,17 @@
-function getTopTen() {
+const LEADERBOARD_LENGTH = 10;
+
+function getNewLeaderboard(length) {
     const scores = [];
     Object.keys(players).forEach(name => {
         scores.push({ name, score: players[name].score });
     });
     scores.sort((a, b) => b.score - a.score);
 
-    return scores.slice(0, 9);
+    return scores.slice(0, length - 1);
 }
 
-function update(leaderboard) {
-    io.emit('leaderboardUpdate', leaderboard);
+function update() {
+    io.emit('leaderboardUpdate', getNewLeaderboard(LEADERBOARD_LENGTH));
 }
 
-module.exports = { getTopTen, update };
+module.exports = { update };
