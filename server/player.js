@@ -7,10 +7,11 @@ function Player(name, socket) {
     this.body = '';
     this.shape = '';
     this.score = 0;
-    this.position = [15000,15000];
+    this.position = [15000, 15000];
     this.powerups = '';
     this.color = 'red';
     this.name = name;
+    this.killed = false;
 
     players[name] = this;
 }
@@ -18,6 +19,11 @@ function Player(name, socket) {
 Player.prototype.setScore = function(score) {
     this.score = score;
     Leaderboard.update();
+};
+
+Player.prototype.kill = function(killer) {
+    this.killed = true;
+    io.emit('playerKilled', killer + ' killed ' + this.name);
 };
 
 module.exports = Player;
