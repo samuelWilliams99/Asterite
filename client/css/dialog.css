@@ -46,8 +46,7 @@ body * {
     color: #ffffff;
     background-color: #000000;
     background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
+    border: 1px solid #ffffff;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -62,8 +61,7 @@ body * {
     color: #ffffff;
     background-color: #000000;
     background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
+    border: 1px solid #ffffff;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .dialog input:focus {
