@@ -8,16 +8,18 @@ body {
 body * {
     font-family: 'Chakra Petch', sans-serif;
     font-weight: 300;
+    text-transform: uppercase;
 }
 
 .dialog {
     color: #ffffff;
     position: fixed;
+    height:320px;
     width: 100%;
     box-sizing: border-box;
     background-color: rgb(9, 9, 9);
     border: 1px solid white;
-    margin-top: 73px;
+    margin-top: 50%;
     text-align: center;
 }
 
@@ -35,6 +37,8 @@ body * {
 
 .menu-screen h2 {
     font-size: 3rem;
+    margin-top:1.5rem;
+    padding:0px;
 }
 
 .dialog input {
