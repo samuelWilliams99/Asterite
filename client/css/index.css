@@ -114,3 +114,9 @@ table {
 td {
     text-align: center;
 }
+
+.p5Canvas {
+    position:absolute;
+    top:0px;
+    z-index:-5;
+}
