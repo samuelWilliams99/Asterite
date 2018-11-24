@@ -15,8 +15,21 @@ function createAsteroid(asteroidData){
     new Asteroid(gameWorld, asteroidData);
 }
 
+function updateAsteroid(asteroidData){
+	if(Asteroids[asteroidData.id]){
+		var asteroid = Asteroids[asteroidData.id];
+		asteroid.body.position = asteroidData.body.position;
+		asteroid.body.angle = asteroidData.body.angle;
+		asteroid.body.velocity = asteroidData.body.velocity;
+		asteroid.body.angularVelocity = asteroidData.body.angularVelocity;
+		return true;
+	} else {
+		return false;
+	}
+}
+
 function realToScreen(position){
 	return [position[0] - viewPos[0], position[1] - viewPos[1]];
 }
 
-var viewPos = [0,0];
+global.viewPos = [0,0];
