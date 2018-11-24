@@ -1,0 +1,12 @@
+#right-pane{
+    position: relative;
+    float: right;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    width: auto;
+    flex-direction: column;
+    justify-content: space-between;
+}
