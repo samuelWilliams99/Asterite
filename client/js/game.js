@@ -14,3 +14,9 @@ gameWorld.addContactMaterial(new p2.ContactMaterial(material, material, {
 function createAsteroid(asteroidData){
     new Asteroid(gameWorld, asteroidData);
 }
+
+function realToScreen(position){
+	return [position[0] - viewPos[0], position[1] - view[1]];
+}
+
+var viewPos = [0,0];
