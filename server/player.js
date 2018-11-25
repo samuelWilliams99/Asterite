@@ -25,13 +25,48 @@ function Player(socket, name, World) {
     this.world.addBody(this.body);
 
     this.score = 0;
-    this.position = [15000, 15000];
     this.powerups = '';
     this.color = '#' + ((Math.random() * 0xffffff) << 0).toString(16);
     this.name = name;
     this.killed = false;
 
     players[name] = this;
+}
+
+Player.prototype.sendObj = function() {
+    return {
+        body: {
+            mass: this.body.mass,
+            position: this.body.position,
+            angle: this.body.angle,
+            velocity: this.body.velocity,
+            angularVelocity: this.body.angularVelocity
+        },
+        powerups: this.powerups,
+        score: this.score,
+        name: this.name,
+        color: this.color,
+
+    };
+};
+
+Player.prototype.sendObjSimple = function() {
+    return {
+        body: {
+            position: this.body.position,
+            angle: this.body.angle,
+            velocity: this.body.velocity,
+            angularVelocity: this.body.angularVelocity
+        },
+        powerups: this.powerups,
+        score: this.score
+    };
+};
+
+
+Player.prototype.remove = function() {
+    delete players[name];
+    this.world.removeBody(this.body);
 }
 
 Player.prototype.setScore = function(score) {
