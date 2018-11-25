@@ -1,12 +1,26 @@
 function renderBodies(){
     for (var key in Asteroids){
         asteroid = Asteroids[key];
+        if (!withinBox(asteroid.body.position, [-2000, -2000], [2000, 2000])){
+            gameWorld.removeBody(asteroid.body);
+            delete Asteroids[key];
+            continue;
+        }
         push();
         translate(asteroid.body.position[0] + width/2, asteroid.body.position[1] + height/2);
         rotate(asteroid.body.angle);
         drawObject(asteroid.shapeVertices, asteroid.body.position);
         pop();
     };
+}
+
+function withinBox(pos, min, max){
+	if(pos[0] >= min[0] && pos[0] <= max[0]) {
+		if(pos[1] >= min[1] && pos[1] <= max[1]) {
+			return true;
+		}
+	}
+	return false;
 }
 
 function drawObject(vertices) {
