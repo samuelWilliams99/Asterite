@@ -11,12 +11,16 @@ ObjectWrapper.prototype.createAsteroid = function() {
     //io.emit('asteroidCreate', ast.sendObj());
 };
 
+
+
 ObjectWrapper.prototype.updateWorld = function(){
 	var sockets = io.sockets.sockets
 	var plyData = [];
 	for(var key in players){
-		var player = players[key];
-		plyData.push(player.sendObjSimple());
+		var ply = players[key];
+		ply.updateBody();
+		
+		plyData.push(ply.sendObjSimple());
 	}
 	for(var key in sockets){
 		var socket = sockets[key];

@@ -9,9 +9,20 @@ function renderBodies(){
         push();
         translate(asteroid.body.position[0] + width/2, asteroid.body.position[1] + height/2);
         rotate(asteroid.body.angle);
-        drawObject(asteroid.shapeVertices, asteroid.body.position);
+        drawObject(asteroid.shapeVertices);
         pop();
     };
+    for (var key in Players){
+        var ply = Players[key];
+        if(key && key == username){
+            viewPos = ply.body.position;
+        }
+        push();
+        translate(ply.body.position[0] + width/2, ply.body.position[1] + height/2);
+        rotate(ply.body.angle);
+        drawObject(ply.shapeVertices);
+        pop();
+    }
 }
 
 function withinBox(pos, min, max){

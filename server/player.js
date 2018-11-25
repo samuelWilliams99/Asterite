@@ -2,7 +2,7 @@ global.players = {};
 const Leaderboard = require('./leaderboard');
 const p2 = require('p2');
 
-var plyShape = [[0, -6], [3, 2], [-3, 2]];
+var plyShape = [[0, -24], [12, 8], [-12, 8]];
 
 function Player(socket, name, World) {
     this.socket = socket;
@@ -64,6 +64,42 @@ Player.prototype.sendObjSimple = function() {
     };
 };
 
+Player.prototype.updateBody = function(){
+    var ply = this;
+    //angle stuff
+    if(ply.targetAng){
+
+        ply.body.angle = ply.body.angle % d(360);
+        
+        var dir = 0;
+        var angle = ply.body.angle;
+        var tarAngle = ply.targetAng
+        var diff = ( (tarAngle - angle + d(540))%d(360) )-d(180);
+        if(Math.abs(diff) > d(2)) {
+            dir = diff > 0 ? 1 : -1;
+        }
+
+        if(dir > 0){
+            ply.body.angularVelocity = d(10); //Math.min(ply.body.angularVelocity + d(5), d(20));
+        } else if(dir < 0) {
+            ply.body.angularVelocity = d(-10); //Math.max(ply.body.angularVelocity - d(5), d(-20));
+        } else {
+            ply.body.angularVelocity = 0;
+        }
+        
+    }
+
+    //vel stuff
+    if(ply.keysDown && ply.keysDown.left){
+        var mag = 100;
+        ply.body.applyForce([mag * Math.cos(ply.body.angle), mag*Math.sin(ply.body.angle)]);
+
+    }
+}
+
+function d(ang){
+    return ang * Math.PI / 180;
+}
 
 Player.prototype.remove = function() {
     delete players[name];
