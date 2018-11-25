@@ -14,8 +14,8 @@ function renderBodies(){
     };
     for (var key in Players){
         var ply = Players[key];
-        if(ply.death){
-            stroke(255,255,255,ply.deathTimeout * 2.55);
+        if(ply.killed){
+            stroke(255,255,255,ply.killedTimeout * 2.55);
         }
         push();
         translate(ply.body.position[0] + width/2, ply.body.position[1] + height/2);
