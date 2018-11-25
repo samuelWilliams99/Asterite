@@ -142,3 +142,14 @@ td {
     left: 0; 
     color: #ffffff;
 }
+
+
+.play-hidden {
+    visibility: hidden;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#play-again {
+    margin-top: 10px;
+}
