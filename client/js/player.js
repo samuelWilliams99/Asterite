@@ -19,6 +19,7 @@ function Player(world, playerData) {
     this.world.addBody(this.body);
 
     this.thrusting = playerData.thrusting;
+    this.death = false;
 
     this.score = playerData.score;
     this.powerups = playerData.powerups;

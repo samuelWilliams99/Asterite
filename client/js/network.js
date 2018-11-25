@@ -11,7 +11,12 @@ socket.on("playerCreate", function(playerData){
 	if(idx >= 0){
 		pendingPlayers.splice(idx, 1);
 	}
+	if(playerData.invalid){return;}
     createPlayer(playerData);
+});
+
+socket.on("playerRemove", function(name){
+	removePlayer(name);
 });
 
 pendingAsteroids = [];
@@ -19,7 +24,9 @@ pendingAsteroids = [];
 pendingPlayers = [];
 
 socket.on("physUpdate", function(data){
-	viewPos = data.viewPos;
+	if(data.viewPos){
+		viewPos = data.viewPos;
+	}
 	var unknownAsteroids = [];
 	for(var i=0; i<data.asteroids.length; i++){
 		var ast = data.asteroids[i];

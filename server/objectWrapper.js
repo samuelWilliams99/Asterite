@@ -30,7 +30,11 @@ ObjectWrapper.prototype.updateWorld = function(){
 		var socket = sockets[key];
 		var data = {asteroids: [], players: plyData};
 		if(socket.name){
-			data.viewPos = players[socket.name].body.position;
+			if(players[socket.name].killed){
+				data.viewPos = socket.viewPos
+			} else {
+				data.viewPos = players[socket.name].body.position;
+			}
 		} else {
 			data.viewPos = socket.viewPos;
 		}
