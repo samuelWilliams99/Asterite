@@ -87,8 +87,9 @@ Player.prototype.sendObjSimple = function() {
 
 Player.prototype.updateBody = function(){
     var ply = this;
-    ply.killedTimeout--;
+    
     if(ply.killed){
+        ply.killedTimeout--;
         if(ply.killedTimeout < 1){
             console.log("remove");
             ply.remove();
@@ -153,6 +154,7 @@ Player.prototype.kill = function(killData) {
     const killer = killData.killer;
     const weapon = killData.weapon;
     this.killed = true;
+    console.log(this.killedTimeout)
     this.thrusting = false;
 
     io.emit('playerKilled', {
