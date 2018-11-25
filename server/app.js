@@ -32,6 +32,7 @@ function server() {
     }, fixedTimeStep * 1000);
 
     io.on('connection', function(socket) {
+        Leaderboard.update();
         var viewPos = [gameWorld.worldSize / 2, gameWorld.worldSize / 2];
         socket.viewPos = viewPos;
         socket.on('playerJoin', function(name) {
