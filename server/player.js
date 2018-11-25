@@ -17,6 +17,7 @@ function getHSL() {
 
 function Player(socket, name, World) {
     this.socket = socket;
+    socket.first = false;
     this.World = World;
     this.world = World.world;
     socket.name = name;
@@ -36,13 +37,14 @@ function Player(socket, name, World) {
     this.world.addBody(this.body);
     this.thrusting = false;
 
-    this.objectType = "Player";
+    this.objectType = 'Player';
 
     this.score = 0;
     this.powerups = '';
     this.color = getHSL();
     this.name = name;
     this.killed = false;
+    this.killedTimeout = 100;
 
     players[name] = this;
 }
@@ -60,7 +62,9 @@ Player.prototype.sendObj = function() {
         score: this.score,
         name: this.name,
         color: this.color,
-        thrusting: this.thrusting
+        thrusting: this.thrusting,
+        killed: this.killed,
+        killedTimeout: this.killedTimeout
     };
 };
 
@@ -75,52 +79,71 @@ Player.prototype.sendObjSimple = function() {
         powerups: this.powerups,
         score: this.score,
         name: this.name,
-        thrusting: this.thrusting
+        thrusting: this.thrusting,
+        killed: this.killed,
+        killedTimeout: this.killedTimeout
     };
 };
 
-Player.prototype.updateBody = function(){
+Player.prototype.updateBody = function() {
     var ply = this;
-    //angle stuff
-    if(ply.targetAng){
 
+    if (ply.killed) {
+        ply.killedTimeout--;
+        if (ply.killedTimeout < 1) {
+            console.log('remove');
+            ply.remove();
+        }
+        return;
+    }
+    //angle stuff
+    if (ply.targetAng) {
         ply.body.angle = ply.body.angle % d(360);
-        
+
         var dir = 0;
         var angle = ply.body.angle;
-        var tarAngle = ply.targetAng
-        var diff = ( (tarAngle - angle + d(540))%d(360) )-d(180);
-        if(Math.abs(diff) > d(2)) {
+        var tarAngle = ply.targetAng;
+        var diff = ((tarAngle - angle + d(540)) % d(360)) - d(180);
+        if (Math.abs(diff) > d(2)) {
             dir = diff > 0 ? 1 : -1;
         }
 
-        if(dir > 0){
-            ply.body.angularVelocity = Math.min(ply.body.angularVelocity + d(1), d(20));
-        } else if(dir < 0) {
-            ply.body.angularVelocity = Math.max(ply.body.angularVelocity - d(1), d(-20));
+        if (dir > 0) {
+            ply.body.angularVelocity = Math.min(
+                ply.body.angularVelocity + d(1),
+                d(20)
+            );
+        } else if (dir < 0) {
+            ply.body.angularVelocity = Math.max(
+                ply.body.angularVelocity - d(1),
+                d(-20)
+            );
         } else {
             ply.body.angularVelocity = 0;
         }
-        
     }
 
     //vel stuff
-    if(ply.keysDown && ply.keysDown.left){
+    if (ply.keysDown && ply.keysDown.left) {
         var mag = 300;
         ply.thrusting = true;
-        ply.body.applyForce([mag * Math.cos(ply.body.angle - Math.PI/2), mag*Math.sin(ply.body.angle - Math.PI/2)]);
-
+        ply.body.applyForce([
+            mag * Math.cos(ply.body.angle - Math.PI / 2),
+            mag * Math.sin(ply.body.angle - Math.PI / 2)
+        ]);
     } else {
         ply.thrusting = false;
     }
-}
+};
 
-function d(ang){
-    return ang * Math.PI / 180;
+function d(ang) {
+    return (ang * Math.PI) / 180;
 }
 
 Player.prototype.remove = function() {
-    delete players[name];
+    io.emit('playerRemove', this.name);
+    this.socket.name = null;
+    delete players[this.name];
     this.world.removeBody(this.body);
 };
 
@@ -130,12 +153,18 @@ Player.prototype.setScore = function(score) {
 };
 
 Player.prototype.kill = function(killData) {
-    console.log("die?");
-    if(this.killed){return;}
-    console.log("BIG DIE");
+    this.socket.viewPos = this.body.position;
+    console.log('die?');
+    if (this.killed) {
+        return;
+    }
+    console.log('BIG DIE');
     const killer = killData.killer;
     const weapon = killData.weapon;
     this.killed = true;
+    console.log(this.killedTimeout);
+    this.thrusting = false;
+    players[killer.name].setScore(players[killer.name].score + 1);
 
     io.emit('playerKilled', {
         killer: {

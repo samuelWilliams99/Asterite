@@ -14,6 +14,9 @@ function renderBodies(){
     };
     for (var key in Players){
         var ply = Players[key];
+        if(ply.killed){
+            stroke(255,255,255,ply.killedTimeout * 2.55);
+        }
         push();
         translate(ply.body.position[0] + width/2, ply.body.position[1] + height/2);
         rotate(ply.body.angle);
@@ -21,6 +24,7 @@ function renderBodies(){
         drawThrust(ply);
         pop();
         ply.particles.run();
+        stroke(255,255,255,255);
     }
 }
 
