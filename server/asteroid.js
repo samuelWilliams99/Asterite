@@ -26,7 +26,7 @@ function Asteroid(World, size){
 	this.body.addShape(this.shape);
 	this.world.addBody(this.body);
 
-
+    this.objectType = "Asteroid";
     this.powerup = null;
 
     Asteroids[this.id] = this;
