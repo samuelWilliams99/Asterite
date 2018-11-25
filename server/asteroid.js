@@ -21,7 +21,7 @@ function Asteroid(World, size){
         angularDamping: 0,
         inertia: 150
 	});
-	this.shapeData = generateShapeData(size || 30);
+	this.shapeData = generateShapeData(size || 60);
 	this.shape = generateShape(this.shapeData);
 	this.body.addShape(this.shape);
 	this.world.addBody(this.body);
