@@ -36,6 +36,5 @@ function draw(){
     }
 
     stroke(0,255,0);
-    fill(0,255,0);
     renderRadar(radarSize, radarPos);
 }
