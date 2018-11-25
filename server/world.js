@@ -14,13 +14,13 @@ function World(){
         var plyB = getPlayerFromBody(bodyB);
         if(plyA && plyA.objectType == "Player") {
             if(!plyB || plyB.objectType == "Asteroid") {
-                plyA.kill({killer: {name: "themself", color: "#FFFFFF"}, weapon:"pain"});
+                plyA.kill({killer: {name: plyA.name, color: "#FFFFFF"}, weapon:"pain"});
             }
             
         }
         if(plyB && plyB.objectType == "Player") {
             if(!plyA || plyA.objectType == "Asteroid") {
-                plyB.kill({killer: {name: "themself", color: "#FFFFFF"}, weapon:"pain"});
+                plyB.kill({killer: {name: plyB.name, color: "#FFFFFF"}, weapon:"pain"});
             }
         }
     })
