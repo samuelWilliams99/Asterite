@@ -29,6 +29,26 @@ function updateAsteroid(asteroidData){
 	}
 }
 
+function createPlayer(playerData){
+	if(Players[playerData.name]){return;}
+    new Player(gameWorld, playerData);
+}
+
+function updatePlayer(playerData){
+	if(Players[playerData.name]){
+		var player = Players[playerData.name];
+		player.body.position = realToScreen(playerData.body.position);
+		player.body.angle = playerData.body.angle;
+		player.body.velocity = playerData.body.velocity;
+		player.body.angularVelocity = playerData.body.angularVelocity;
+		player.score = playerData.score;
+		player.powerups = playerData.powerups;
+		return true;
+	} else {
+		return false;
+	}
+}
+
 function realToScreen(position){
 	return [position[0] - viewPos[0], position[1] - viewPos[1]];
 }

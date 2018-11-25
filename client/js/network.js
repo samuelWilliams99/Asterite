@@ -6,23 +6,48 @@ socket.on("asteroidCreate", function(asteroidData){
     createAsteroid(asteroidData);
 });
 
+socket.on("playerCreate", function(playerData){
+	var idx = pendingPlayers.indexOf(playerData.id);
+	if(idx >= 0){
+		pendingPlayers.splice(idx, 1);
+	}
+    createPlayer(playerData);
+});
+
 pendingAsteroids = [];
 
-socket.on("asteroidUpdate", function(data){
+pendingPlayers = [];
+
+socket.on("physUpdate", function(data){
 	viewPos = data.viewPos;
-	var unknown = [];
+	var unknownAsteroids = [];
 	for(var i=0; i<data.asteroids.length; i++){
 		var ast = data.asteroids[i];
 		if(pendingAsteroids.indexOf(ast.id) >= 0) {
 			continue;
 		}
 		if(!updateAsteroid(ast)){
-			unknown.push(ast.id);
-			pendingAsteroids.push(ast.id)
+			unknownAsteroids.push(ast.id);
+			pendingAsteroids.push(ast.id);
 		}
 	}
-	if(unknown.length > 0){
-		socket.emit("asteroidRequestData", unknown);
+	if(unknownAsteroids.length > 0){
+		socket.emit("asteroidRequestData", unknownAsteroids);
+	}
+
+	var unknownPlayers = [];
+	for(var i=0; i<data.players.length; i++){
+		var ply = data.players[i];
+		if(pendingPlayers.indexOf(ply.id) >= 0) {
+			continue;
+		}
+		if(!updatePlayer(ply)){
+			unknownPlayers.push(ply.id);
+			pendingPlayers.push(ply.id);
+		}
+	}
+	if(unknownPlayers.length > 0){
+		socket.emit("playerRequestData", unknownPlayers);
 	}
 });
 
