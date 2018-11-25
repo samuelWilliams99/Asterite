@@ -33,7 +33,7 @@ function Asteroid(World, size){
 }
 
 Asteroid.prototype.remove = function() {
-    Asteroids[this.id] = null;
+    delete Asteroids[this.id];
     this.world.removeBody(this.body);
 };
 
