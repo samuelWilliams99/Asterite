@@ -12,7 +12,7 @@ function server() {
     var gameWorld = new World();
     var objectWrapper = new ObjectWrapper(gameWorld);
 
-    var fr = 10;
+    var fr = 30;
 
     var maxSubSteps = 10;
     var fixedTimeStep = 1 / fr;
