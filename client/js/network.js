@@ -19,7 +19,7 @@ pendingAsteroids = [];
 pendingPlayers = [];
 
 socket.on("physUpdate", function(data){
-	//viewPos = data.viewPos;
+	viewPos = data.viewPos;
 	var unknownAsteroids = [];
 	for(var i=0; i<data.asteroids.length; i++){
 		var ast = data.asteroids[i];
