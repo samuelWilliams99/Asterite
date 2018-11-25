@@ -31,8 +31,25 @@ function drawObject(vertices) {
     endShape(CLOSE);
 }
 
+var angle = 0;
+var offset = 2;
 function renderRadar(radarSize, radarPos){
+    var opacity = 255;
+    strokeWeight(3);
     var scaleMult = radarSize / 4000;
+    for (var i = 0; i < 8; i++){
+        push();
+        stroke(0,255,0, opacity);
+        opacity -= 30;
+        translate(radarPos[0], radarPos[1]);
+        rotate((angle-i*offset) * Math.PI / 180);
+        line(0, 0, 0, 0-radarSize/2);
+        pop();
+    }
+    angle = betterMod((angle + 5), 360);
+    strokeWeight(1);
+
+    stroke(0,255,0);
     for (var key in Asteroids){
         asteroid = Asteroids[key];
         var relativePosition = [asteroid.body.position[0]*scaleMult, asteroid.body.position[1]*scaleMult]
@@ -40,4 +57,8 @@ function renderRadar(radarSize, radarPos){
             ellipse(radarPos[0]+relativePosition[0], radarPos[1]+relativePosition[1], 2, 2);
         }
     }
+}
+
+function betterMod(a, b){
+    return ((a % b) + b) % b;
 }
