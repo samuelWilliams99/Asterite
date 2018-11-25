@@ -6,6 +6,10 @@ function ObjectWrapper(gameWorld) {
     this.gameWorld = gameWorld;
 }
 
+ObjectWrapper.prototype.asteroidCount = function(){
+	return Object.keys(Asteroids).length;
+}
+
 ObjectWrapper.prototype.createAsteroid = function() {
     var ast = new Asteroid(this.gameWorld);
     //io.emit('asteroidCreate', ast.sendObj());

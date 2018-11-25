@@ -19,7 +19,7 @@ function server() {
     var lastTimeSeconds = 0;
 
     setInterval(function() {
-    	if(Asteroids.length < 100){
+    	if(objectWrapper.asteroidCount() < 100){
         	objectWrapper.createAsteroid();
         }
     }, 1000);
