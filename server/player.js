@@ -25,7 +25,17 @@ Player.prototype.kill = function(killData) {
     const { killer, weapon } = killData;
     this.killed = true;
 
-    io.emit('playerKilled', { killer, killed: this.name, weapon });
+    io.emit('playerKilled', {
+        killer: {
+            name: killer.name,
+            color: killer.color
+        },
+        killed: {
+            name: this.name,
+            color: this.color
+        },
+        weapon
+    });
 };
 
 module.exports = Player;
