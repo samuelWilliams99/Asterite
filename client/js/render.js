@@ -23,6 +23,18 @@ function renderBodies(){
         drawObject(ply.shapeVertices);
         drawThrust(ply);
         pop();
+        strokeWeight(10);
+        stroke(0,255,0,50);
+        if(ply.dragging){
+            for(var i=0; i<ply.dragging.length; i++){
+                for(var key in Asteroids){
+                    if(Asteroids[key].id == ply.dragging[i]) {
+                        line(ply.body.position[0] + width/2, ply.body.position[1] + height/2, Asteroids[key].body.position[0] + width/2, Asteroids[key].body.position[1] + height/2);
+                    }
+                }
+            }
+        }
+        strokeWeight(1);
         ply.particles.run();
         stroke(255,255,255,255);
     }

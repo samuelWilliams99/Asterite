@@ -44,6 +44,7 @@ function Player(socket, name, World) {
     this.thrusting = false;
 
     this.objectType = 'Player';
+    this.dragging = [];
 
     this.score = 0;
     this.powerups = '';
@@ -70,7 +71,8 @@ Player.prototype.sendObj = function() {
         color: this.color,
         thrusting: this.thrusting,
         killed: this.killed,
-        killedTimeout: this.killedTimeout
+        killedTimeout: this.killedTimeout,
+        dragging: this.dragging
     };
 };
 
@@ -87,7 +89,8 @@ Player.prototype.sendObjSimple = function() {
         name: this.name,
         thrusting: this.thrusting,
         killed: this.killed,
-        killedTimeout: this.killedTimeout
+        killedTimeout: this.killedTimeout,
+        dragging: this.dragging
     };
 };
 
@@ -130,17 +133,44 @@ Player.prototype.updateBody = function() {
     }
 
     //vel stuff
-    if (ply.keysDown && ply.keysDown.left) {
-        var mag = 300;
-        ply.thrusting = true;
-        ply.body.applyForce([
-            mag * Math.cos(ply.body.angle - Math.PI / 2),
-            mag * Math.sin(ply.body.angle - Math.PI / 2)
-        ]);
-    } else {
-        ply.thrusting = false;
+    if (ply.keysDown){
+
+        if(ply.keysDown.left) {
+            var mag = 300;
+            ply.thrusting = true;
+            ply.body.applyForce([
+                mag * Math.cos(ply.body.angle - Math.PI / 2),
+                mag * Math.sin(ply.body.angle - Math.PI / 2)
+            ]);
+        } else {
+            ply.thrusting = false;
+        }
+        if(ply.keysDown.right){
+            ply.dragging = [];
+            for(var key in Asteroids){
+                var ast = Asteroids[key];
+                var a = ast.body.position;
+                var b = ply.body.position;
+                if( dist(a[0], a[1], b[0], b[1]) < 300 ) {
+                    ast.body.applyForce(reScale([b[0] - a[0], b[1] - a[1]], 300));
+                    ply.dragging.push(ast.id);
+                }
+            }
+        } else {
+            ply.dragging = [];
+        }
     }
 };
+
+function dist(a1,a2,b1,b2){
+    return Math.sqrt(Math.pow(a1-b1, 2) + Math.pow(a2-b2, 2));
+}
+
+function reScale(a, newScale){
+    var mag = dist(0,0,a[0],a[1]);
+    var dir = [a[0] / mag, a[1] / mag];
+    return [dir[0] * newScale, dir[1] * newScale];
+}
 
 function d(ang) {
     return (ang * Math.PI) / 180;
@@ -171,6 +201,7 @@ Player.prototype.kill = function(killData) {
     this.killed = true;
     console.log(this.killedTimeout);
     this.thrusting = false;
+    this.dragging = [];
     players[killer.name].setScore(players[killer.name].score + 1);
 
     io.emit('playerKilled', {

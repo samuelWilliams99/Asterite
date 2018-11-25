@@ -58,6 +58,7 @@ function updatePlayer(playerData){
 		player.thrusting = playerData.thrusting;
 		player.killed = playerData.killed;
 		player.killedTimeout = playerData.killedTimeout;
+		player.dragging = playerData.dragging;
 		return true;
 	} else {
 		return false;
