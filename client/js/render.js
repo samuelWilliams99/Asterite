@@ -75,10 +75,6 @@ function renderRadar(radarSize, radarPos){
         asteroidAngle = 360 - asteroidAngle;
         asteroidAngle = (asteroidAngle + 180) % 360;
 
-        if(asteroidAngle < 0){
-            console.log(asteroidAngle);
-        }
-
         if (asteroidAngle <= angle && asteroidAngle >= angle -6){
             asteroid.lastPosition = asteroid.body.position;
             asteroid.lastPositionLifetime = 300 / 5;
