@@ -36,6 +36,8 @@ function Player(socket, name, World) {
     this.world.addBody(this.body);
     this.thrusting = false;
 
+    this.objectType = "Player";
+
     this.score = 0;
     this.powerups = '';
     this.color = getHSL();
@@ -128,6 +130,9 @@ Player.prototype.setScore = function(score) {
 };
 
 Player.prototype.kill = function(killData) {
+    console.log("die?");
+    if(this.killed){return;}
+    console.log("BIG DIE");
     const killer = killData.killer;
     const weapon = killData.weapon;
     this.killed = true;
