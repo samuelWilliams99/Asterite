@@ -9,9 +9,10 @@ var messages = [];
 function sendMessage(socket, payload) {
     // socket.broadcast.emit('sendMessage', payload);
     console.log(2);
-    messages.push(payload);
-    // var n = messages.slice(Math.max(0, messages.length-5), messages.length);
-    io.emit('chatUpdate', messages);
+    var data = {name:socket.name, color:players[socket.name].color, message:payload }
+    messages.push(data);
+    var n = messages.slice(Math.max(0, messages.length-5), messages.length);
+    io.emit('chatUpdate', n);
     
 }
 

@@ -84,6 +84,7 @@ function server() {
         })
 
         socket.on('sendMessage', function(payload) {
+            
             Chat.sendMessage(socket, payload);
         });
 

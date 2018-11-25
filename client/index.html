@@ -9,6 +9,7 @@
 		<link rel = 'stylesheet' href = './css/leaderboard.css' type = 'text/css'/>
 		<link rel = 'stylesheet' href = './css/rightPane.css' type = 'text/css'/>
 		<link rel = 'stylesheet' href = './css/index.css' type = 'text/css'/>
+		<link rel = 'stylesheet' href = './css/chat.css' type = 'text/css'/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
 		<script src="./js/lib/p2.js"></script>
@@ -63,8 +64,8 @@
 					<div id="chat" class="view">
 						<h2>Chat</h2>
 						<div id="output-chat__text"></div>
-						<form onsubmit="submitChat(event)" class="dialog__form">
-							<input type="text" class="input-text text-center" id="input-chat__text" autocomplete="off"></input>
+						<form onsubmit="submitChat(event)">
+							<input type="text" class="input-text text-center small-padding-input" id="input-chat__text" autocomplete="off"></input>
 							<button class="btn input-button">Chat</button>
 						</form>
 					</div>
