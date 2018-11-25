@@ -23,6 +23,8 @@ function draw(){
     background(0);
     fill(0);
     stroke(255);
+
+    text(Math.round(viewPos[0]) + ", " + Math.round(viewPos[1]), 100, 100);
     
     var timeSeconds = millis();
     lastTimeSeconds = lastTimeSeconds || timeSeconds;
@@ -41,6 +43,7 @@ function draw(){
     renderRadar(radarSize, radarPos);
 
     if(username){
+        if(!Players[username]){ return; }
         var dx = mouseX - width/2;
         var dy = mouseY - height/2
         var mouseAng = Math.atan(dx / dy);
@@ -55,8 +58,8 @@ function draw(){
         tryFace(mouseAng);
         sendKeys();
         if(keysDown && keysDown.left && Players[username]){
-            var mag = 100;
-            Players[username].body.applyForce([mag * Math.cos(Players[username].body.angle), mag*Math.sin(Players[username].body.angle)]);
+            var mag = 300;
+            Players[username].body.applyForce([mag * Math.cos(Players[username].body.angle - Math.PI/2), mag*Math.sin(Players[username].body.angle - Math.PI/2)]);
 
         }
     }
