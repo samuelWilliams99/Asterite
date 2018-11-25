@@ -42,12 +42,8 @@
 			
 			<div class="button-bar view">
 				<div onclick="togglePane(event)" data-target-view="leaderboard" id="leaderboard__button" class="btn"><i class="material-icons">list</i></div>
-				<div onclick="togglePane(event)" data-target-view="leaderboard" id="chat__button"  class="btn"><i class="material-icons">message</i></div>
+				<div onclick="togglePane(event)" data-target-view="chat" id="chat__button"  class="btn"><i class="material-icons">message</i></div>
 				<div onclick="togglePane(event)" data-target-view="killfeed" id="killfeed__button"  class="btn"><i class="material-icons">announcement</i></div>
-
-				<!-- <button onclick="toggleLeaderboard()" id="toggle-leaderboard" class="btn"><span id = "span__leaderboard"><i class="material-icons md-48">list</i></span></button> -->
-				<!-- <button onclick="togglechat()" id="toggle-chat" class="btn"><span id = "span__leaderboard"><i class="material-icons">message</i></span></button> -->
-				<!-- <button onclick="toggleKillfeed()" id="toggle-killfeed" class="btn"><span id = "span__leaderboard"><i class="material-icons">announcement</i></span></button> -->
 			</div>
 
 			<div id="right-pane">
@@ -61,7 +57,18 @@
 						</div>
 					</div>
 				</div>
-	
+
+				<div id="chat-container">
+					<div id="chat" class="view">
+						<h2>Chat</h2>
+						<p id="output-chat__text"></p>
+						<form onsubmit="submitChat(event)" class="dialog__form">
+							<input type="text" class="input-text text-center" id="input-chat__text" autocomplete="off"></input>
+							<button class="btn input-button">Chat</button>
+						</form>
+					</div>
+				</div>
+
 				<div id="killfeed-container">
 					<div id="killfeed" class="view">
 						<h2>Killfeed</h2>

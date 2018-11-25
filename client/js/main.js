@@ -15,6 +15,10 @@ function joinGame(e){
     socket.emit('playerJoin', name);
 }
 
+function updateLeaderboardForAll(){
+    
+}
+
 function togglePane(e){
     var id = "#" + e.currentTarget.id;
     var targetViewId = "#" + $(id).data("target-view");
@@ -57,4 +61,17 @@ function updateKillfeed(killObj){
     document.getElementById("killed__span").style.color = killObj.killed.color;
     document.getElementById("weapon__span").innerHTML = killObj.weapon;
 
+}
+
+
+function updateChat(m){
+    console.log(m);
+}
+
+function submitChat(e){
+    e.preventDefault();
+    var message = document.getElementById('input-chat__text').value;
+    document.getElementById('input-chat__text').value = "";
+    console.log(message);
+    socket.emit('sendMessage', message);
 }
