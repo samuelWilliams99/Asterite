@@ -34,6 +34,7 @@ function Player(socket, name, World) {
     this.shape = new p2.Convex({ vertices: plyShape });
     this.body.addShape(this.shape);
     this.world.addBody(this.body);
+    this.thrusting = false;
 
     this.score = 0;
     this.powerups = '';
@@ -56,7 +57,8 @@ Player.prototype.sendObj = function() {
         powerups: this.powerups,
         score: this.score,
         name: this.name,
-        color: this.color
+        color: this.color,
+        thrusting: this.thrusting
     };
 };
 
@@ -70,7 +72,8 @@ Player.prototype.sendObjSimple = function() {
         },
         powerups: this.powerups,
         score: this.score,
-        name: this.name
+        name: this.name,
+        thrusting: this.thrusting
     };
 };
 
@@ -90,9 +93,9 @@ Player.prototype.updateBody = function(){
         }
 
         if(dir > 0){
-            ply.body.angularVelocity = d(10); //Math.min(ply.body.angularVelocity + d(5), d(20));
+            ply.body.angularVelocity = Math.min(ply.body.angularVelocity + d(1), d(20));
         } else if(dir < 0) {
-            ply.body.angularVelocity = d(-10); //Math.max(ply.body.angularVelocity - d(5), d(-20));
+            ply.body.angularVelocity = Math.max(ply.body.angularVelocity - d(1), d(-20));
         } else {
             ply.body.angularVelocity = 0;
         }
@@ -101,9 +104,12 @@ Player.prototype.updateBody = function(){
 
     //vel stuff
     if(ply.keysDown && ply.keysDown.left){
-        var mag = 100;
-        ply.body.applyForce([mag * Math.cos(ply.body.angle), mag*Math.sin(ply.body.angle)]);
+        var mag = 300;
+        ply.thrusting = true;
+        ply.body.applyForce([mag * Math.cos(ply.body.angle - Math.PI/2), mag*Math.sin(ply.body.angle - Math.PI/2)]);
 
+    } else {
+        ply.thrusting = false;
     }
 }
 

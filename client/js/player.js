@@ -18,6 +18,8 @@ function Player(world, playerData) {
     this.body.addShape(this.shape);
     this.world.addBody(this.body);
 
+    this.thrusting = playerData.thrusting;
+
     this.score = playerData.score;
     this.powerups = playerData.powerups;
     this.color = playerData.color;
