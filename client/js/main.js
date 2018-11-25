@@ -87,21 +87,22 @@ function updateLeaderboard(scores) {
     document.getElementById('leaderboard__table').innerHTML = tableString;
 }
 
-function updateKillfeed(killObj){
+socket.on('playerKilled', function updateKillfeed(killObj){
     document.getElementById("killfeed__text").innerHTML = "<span id=\"killer__span\"></span> -> <span id=\"killed__span\"></span> with <span id=\"weapon__span\"></span>";
     document.getElementById("killer__span").innerHTML = killObj.killer.name;
     document.getElementById("killer__span").style.color = killObj.killer.color;
     document.getElementById("killed__span").innerHTML = killObj.killed.name;
     document.getElementById("killed__span").style.color = killObj.killed.color;
     document.getElementById("weapon__span").innerHTML = killObj.weapon;
-
-}
+});
 
 
 socket.on('chatUpdate', function(m){
     message = "";
     for(var i = 0; i < m.length; i++){
-        message = message +"<p>"+ m[i] + "</p>";
+        var userColor = m[i].color;
+        var name = m[i].name;
+        message = message +"<p class=\"chat__style\" style=color:"+userColor+";>"+ name + ": " + m[i].message + "</p>";
     }
     
     document.getElementById('output-chat__text').innerHTML = message;
