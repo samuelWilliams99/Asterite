@@ -14,9 +14,6 @@ function renderBodies(){
     };
     for (var key in Players){
         var ply = Players[key];
-        if(key && key == username){
-            viewPos = ply.body.position;
-        }
         push();
         translate(ply.body.position[0] + width/2, ply.body.position[1] + height/2);
         rotate(ply.body.angle);
