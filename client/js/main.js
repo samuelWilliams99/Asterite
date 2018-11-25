@@ -116,3 +116,5 @@ function submitChat(e){
     document.getElementById('input-chat__text').value = "";
     socket.emit('sendMessage', m);
 }
+
+
