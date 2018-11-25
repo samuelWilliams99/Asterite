@@ -11,7 +11,7 @@ function Player(socket, name, World) {
     socket.name = name;
     this.body = new p2.Body({
         mass: 10,
-        position: [this.World.worldSize/2,this.World.worldSize/2],
+        position: [this.World.worldSize / 2, this.World.worldSize / 2],
         //position: [getRandomInt(100,1800), 500],
         angle: 0,
         velocity: [0, 0],
@@ -20,7 +20,7 @@ function Player(socket, name, World) {
         angularDamping: 0,
         inertia: 150
     });
-    this.shape = new p2.Convex({vertices: plyShape});
+    this.shape = new p2.Convex({ vertices: plyShape });
     this.body.addShape(this.shape);
     this.world.addBody(this.body);
 
@@ -76,7 +76,8 @@ Player.prototype.setScore = function(score) {
 };
 
 Player.prototype.kill = function(killData) {
-    const { killer, weapon } = killData;
+    const killer = killData.killer;
+    const weapon = killData.weapon;
     this.killed = true;
 
     io.emit('playerKilled', {
