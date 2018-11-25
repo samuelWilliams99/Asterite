@@ -24,7 +24,10 @@ function draw(){
     fill(0);
     stroke(255);
 
-    text(Math.round(viewPos[0]) + ", " + Math.round(viewPos[1]), 100, 100);
+    // text(Math.round(viewPos[0]) + ", " + Math.round(viewPos[1]), 100, 100);
+    
+    document.getElementById('left-view-pos').innerHTML = Math.round(viewPos[0]);
+    document.getElementById('right-view-pos').innerHTML = Math.round(viewPos[1]), 100, 100;
     
     var timeSeconds = millis();
     lastTimeSeconds = lastTimeSeconds || timeSeconds;
