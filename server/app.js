@@ -34,6 +34,7 @@ function server() {
     }, fixedTimeStep * 1000);
 
     io.on('connection', function(socket) {
+    	socket.first = true;
         Leaderboard.update();
         var viewPos = [gameWorld.worldSize / 2, gameWorld.worldSize / 2];
         socket.viewPos = viewPos;
@@ -65,7 +66,7 @@ function server() {
             console.log(names);
             for (var i = 0; i < names.length; i++) {
                 var ply = players[names[i]];
-                socket.emit('playerCreate', ply.sendObj());
+                socket.emit('playerCreate', ply ? ply.sendObj() : {name: names[i], invalid:true});
             }
         });
 
