@@ -59,7 +59,8 @@ Player.prototype.sendObjSimple = function() {
             angularVelocity: this.body.angularVelocity
         },
         powerups: this.powerups,
-        score: this.score
+        score: this.score,
+        name: this.name
     };
 };
 

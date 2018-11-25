@@ -33,7 +33,7 @@ ObjectWrapper.prototype.updateWorld = function(){
 			}
 		};
 
-		socket.emit("asteroidUpdate", data);
+		socket.emit("physUpdate", data);
 	};
 }
 
