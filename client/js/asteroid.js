@@ -4,7 +4,6 @@ function Asteroid(world, asteroidData){
 
 	this.world = world;
 	this.id = asteroidData.id;
-	console.log("New asteroid: " + this.id);
 	this.body = new p2.Body({
 		mass: asteroidData.body.mass,
 		position: realToScreen(asteroidData.body.position),
