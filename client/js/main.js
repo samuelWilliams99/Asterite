@@ -3,8 +3,9 @@ socket.on('leaderboardUpdate', function(scores) {
 });
 
 socket.on('joinError', function(errorMessage) {
-    $('#join-error').text(errorMessage);
-    $('#join-error').removeClass('hidden');
+    $('#userName').addClass('has-error');
+    $('#userName').attr('placeholder', errorMessage);
+    $('#userName').val('');
 });
 
 socket.on('joinSuccess', function() {
