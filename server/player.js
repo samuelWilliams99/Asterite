@@ -17,6 +17,7 @@ function getHSL() {
 
 function Player(socket, name, World) {
     this.socket = socket;
+    socket.first = false;
     this.World = World;
     this.world = World.world;
     socket.name = name;
@@ -43,6 +44,7 @@ function Player(socket, name, World) {
     this.color = getHSL();
     this.name = name;
     this.killed = false;
+    this.killedTimeout = 100;
 
     players[name] = this;
 }
@@ -60,7 +62,9 @@ Player.prototype.sendObj = function() {
         score: this.score,
         name: this.name,
         color: this.color,
-        thrusting: this.thrusting
+        thrusting: this.thrusting,
+        killed: this.killed,
+        killedTimeout: this.killedTimeout
     };
 };
 
@@ -75,12 +79,23 @@ Player.prototype.sendObjSimple = function() {
         powerups: this.powerups,
         score: this.score,
         name: this.name,
-        thrusting: this.thrusting
+        thrusting: this.thrusting,
+        killed: this.killed,
+        killedTimeout: this.killedTimeout
     };
 };
 
 Player.prototype.updateBody = function() {
     var ply = this;
+
+    if (ply.killed) {
+        ply.killedTimeout--;
+        if (ply.killedTimeout < 1) {
+            console.log('remove');
+            ply.remove();
+        }
+        return;
+    }
     //angle stuff
     if (ply.targetAng) {
         ply.body.angle = ply.body.angle % d(360);
@@ -126,7 +141,9 @@ function d(ang) {
 }
 
 Player.prototype.remove = function() {
-    delete players[name];
+    io.emit('playerRemove', this.name);
+    this.socket.name = null;
+    delete players[this.name];
     this.world.removeBody(this.body);
 };
 
@@ -136,6 +153,7 @@ Player.prototype.setScore = function(score) {
 };
 
 Player.prototype.kill = function(killData) {
+    this.socket.viewPos = this.body.position;
     console.log('die?');
     if (this.killed) {
         return;
@@ -144,7 +162,10 @@ Player.prototype.kill = function(killData) {
     const killer = killData.killer;
     const weapon = killData.weapon;
     this.killed = true;
+    console.log(this.killedTimeout);
+    this.thrusting = false;
     players[killer.name].setScore(players[killer.name].score + 1);
+
     io.emit('playerKilled', {
         killer: {
             name: killer.name,

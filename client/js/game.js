@@ -34,6 +34,16 @@ function createPlayer(playerData){
     new Player(gameWorld, playerData);
 }
 
+function removePlayer(name){
+	if(Players[name]){
+		gameWorld.removeBody(Players[name].body);
+		delete Players[name];
+		if(username == name){
+			username = null;
+		}
+	}
+}
+
 function updatePlayer(playerData){
 	if(Players[playerData.name]){
 		var player = Players[playerData.name];
@@ -44,6 +54,8 @@ function updatePlayer(playerData){
 		player.score = playerData.score;
 		player.powerups = playerData.powerups;
 		player.thrusting = playerData.thrusting;
+		player.killed = playerData.killed;
+		player.killedTimeout = playerData.killedTimeout;
 		return true;
 	} else {
 		return false;
