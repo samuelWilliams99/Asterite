@@ -23,6 +23,8 @@ function draw(){
     background(0);
     fill(0);
     stroke(255);
+
+    text(viewPos.toString(), 100, 100);
     
     var timeSeconds = millis();
     lastTimeSeconds = lastTimeSeconds || timeSeconds;
@@ -41,6 +43,8 @@ function draw(){
     renderRadar(radarSize, radarPos);
 
     if(username){
+        if(!Players[username]){ return; }
+        viewPos = Players[username].body.position;
         var dx = mouseX - width/2;
         var dy = mouseY - height/2
         var mouseAng = Math.atan(dx / dy);
