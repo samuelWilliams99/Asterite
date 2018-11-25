@@ -36,6 +36,8 @@ function server() {
         socket.on('playerJoin', function(name) {
             if (typeof players[name] !== 'undefined') {
                 socket.emit('joinError', 'This name is taken!');
+            } else if (name.trim() === '') {
+                socket.emit('joinError', 'Name must not be empty');
             } else {
                 console.log(name + ' joined the game!');
                 var ply = new Player(socket, name, gameWorld);

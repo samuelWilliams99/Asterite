@@ -118,6 +118,10 @@ td {
     z-index: -5;
 }
 
+.has-error {
+    border: 1px solid red;
+}
+
 .error {
     color: red;
 }
