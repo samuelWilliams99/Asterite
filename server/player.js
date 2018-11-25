@@ -29,7 +29,10 @@ function Player(socket, name, World) {
     socket.name = name;
     this.body = new p2.Body({
         mass: 10,
-        position: [this.World.worldSize / 2 + getRandomInt(-800, 800), this.World.worldSize / 2 + getRandomInt(-800, 800)],
+        position: [
+            this.World.worldSize / 2 + getRandomInt(-800, 800),
+            this.World.worldSize / 2 + getRandomInt(-800, 800)
+        ],
         //position: [getRandomInt(100,1800), 500],
         angle: 0,
         velocity: [0, 0],
@@ -171,7 +174,9 @@ Player.prototype.kill = function(killData) {
     this.killed = true;
     console.log(this.killedTimeout);
     this.thrusting = false;
-    players[killer.name].setScore(players[killer.name].score + 1);
+    if (killer.name != this.name) {
+        players[killer.name].setScore(players[killer.name].score + 1);
+    }
 
     io.emit('playerKilled', {
         killer: {
