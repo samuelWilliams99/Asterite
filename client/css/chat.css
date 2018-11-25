@@ -1,0 +1,9 @@
+.chat__style {
+    font-size:12px;
+}
+
+
+.small-padding-input {
+    box-sizing: border-box;
+    width: 90%;
+}
