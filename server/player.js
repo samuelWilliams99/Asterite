@@ -1,7 +1,8 @@
 global.players = {};
 const Leaderboard = require('./leaderboard');
+const p2 = require('p2');
 
-var plyShape = [[0, -6], [-3, 2],[3, 2]];
+var plyShape = [[0, -6], [3, 2], [-3, 2]];
 
 function Player(socket, name, World) {
     this.socket = socket;
@@ -22,7 +23,7 @@ function Player(socket, name, World) {
     this.shape = new p2.Convex({vertices: plyShape});
     this.body.addShape(this.shape);
     this.world.addBody(this.body);
-    
+
     this.score = 0;
     this.position = [15000, 15000];
     this.powerups = '';
