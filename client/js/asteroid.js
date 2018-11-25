@@ -20,6 +20,8 @@ function Asteroid(world, asteroidData){
     this.body.addShape(this.shape);
     this.body.objectType = "Asteroid";
 	world.addBody(this.body);
+	this.lastPosition = this.body.position;
+	this.lastPositionLifetime = 0;
 
 	this.powerup = asteroidData.powerup;
 

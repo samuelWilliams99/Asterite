@@ -4,6 +4,17 @@ const p2 = require('p2');
 
 var plyShape = [[0, -24], [12, 8], [-12, 8]];
 
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getHSL() {
+    var h = randomInt(0, 360);
+    var s = randomInt(42, 98);
+    var l = randomInt(40, 90);
+    return `hsl(${h},${s}%,${l}%)`;
+}
+
 function Player(socket, name, World) {
     this.socket = socket;
     this.World = World;
@@ -26,7 +37,7 @@ function Player(socket, name, World) {
 
     this.score = 0;
     this.powerups = '';
-    this.color = '#' + ((Math.random() * 0xffffff) << 0).toString(16);
+    this.color = getHSL();
     this.name = name;
     this.killed = false;
 
@@ -45,8 +56,7 @@ Player.prototype.sendObj = function() {
         powerups: this.powerups,
         score: this.score,
         name: this.name,
-        color: this.color,
-
+        color: this.color
     };
 };
 
@@ -104,7 +114,7 @@ function d(ang){
 Player.prototype.remove = function() {
     delete players[name];
     this.world.removeBody(this.body);
-}
+};
 
 Player.prototype.setScore = function(score) {
     this.score = score;
