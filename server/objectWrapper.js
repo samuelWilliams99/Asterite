@@ -11,11 +11,20 @@ ObjectWrapper.prototype.createAsteroid = function() {
     //io.emit('asteroidCreate', ast.sendObj());
 };
 
+
+
 ObjectWrapper.prototype.updateWorld = function(){
 	var sockets = io.sockets.sockets
+	var plyData = [];
+	for(var key in players){
+		var ply = players[key];
+		ply.updateBody();
+		
+		plyData.push(ply.sendObjSimple());
+	}
 	for(var key in sockets){
 		var socket = sockets[key];
-		var data = {asteroids: []};
+		var data = {asteroids: [], players: plyData};
 		if(socket.name){
 			data.viewPos = players[socket.name].body.position;
 		} else {
@@ -27,7 +36,8 @@ ObjectWrapper.prototype.updateWorld = function(){
 				data.asteroids.push(asteroid.sendObjSimple());
 			}
 		};
-		socket.emit("asteroidUpdate", data);
+
+		socket.emit("physUpdate", data);
 	};
 }
 
