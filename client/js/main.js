@@ -37,6 +37,7 @@ function joinGame(e) {
     var name = document.getElementById('userName').value;
     pendingName = name;
     socket.emit('playerJoin', name);
+    $('#play-scored').addClass("play-hidden");
 }
 
 function togglePane(e) {
@@ -117,4 +118,14 @@ function submitChat(e){
     socket.emit('sendMessage', m);
 }
 
+
+function openStartDialg(score, name){
+    $('#player-name-dialog').removeClass('hidden');
+    document.getElementById("userName").value = name;
+    document.getElementById("play-scored").innerHTML = "You scored "+ score;
+    document.getElementById("play-again").innerHTML = "Do you want to play again?";
+
+    $('#play-scored').removeClass("play-hidden");
+
+}
 

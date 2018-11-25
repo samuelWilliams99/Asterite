@@ -11,11 +11,15 @@
 
 .small-padding-input {
     box-sizing: border-box;
-    text-align: right;
+    text-align: left;
     width: 90%;
 }
 
 .output-chat__text {
     text-align: left;
     padding-bottom: 200px;
+}
+
+.input-text {
+    outline:none;
 }
