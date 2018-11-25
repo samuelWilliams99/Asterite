@@ -19,6 +19,7 @@ function Player(world, playerData) {
     this.world.addBody(this.body);
 
     this.thrusting = playerData.thrusting;
+    this.death = false;
 
     this.particles = new ParticleSystem(createVector(0, 22));
 
