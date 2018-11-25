@@ -7,7 +7,7 @@ socket.on("asteroidCreate", function(asteroidData){
 });
 
 socket.on("playerCreate", function(playerData){
-	var idx = pendingPlayers.indexOf(playerData.id);
+	var idx = pendingPlayers.indexOf(playerData.name);
 	if(idx >= 0){
 		pendingPlayers.splice(idx, 1);
 	}

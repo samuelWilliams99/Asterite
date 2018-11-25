@@ -26,8 +26,9 @@ function server() {
         var timeSeconds = Date.now();
         lastTimeSeconds = lastTimeSeconds || timeSeconds;
         var timeSinceLastCall = timeSeconds - lastTimeSeconds;
-        gameWorld.world.step(fixedTimeStep, timeSinceLastCall, maxSubSteps);
         objectWrapper.updateWorld();
+        gameWorld.world.step(fixedTimeStep, timeSinceLastCall, maxSubSteps);
+        
     }, fixedTimeStep * 1000);
 
     io.on('connection', function(socket) {
@@ -64,6 +65,20 @@ function server() {
                 socket.emit('playerCreate', ply.sendObj());
             }
         });
+
+        socket.on("playerSendKeys", function(username, keys){
+        	if(username == socket.name){
+        		var ply = players[username];
+        		ply.keysDown = keys;
+        	}
+        })
+
+        socket.on("playerTryFace", function(username, ang){
+        	if(username == socket.name){
+        		var ply = players[username];
+        		ply.targetAng = ang;
+        	}
+        })
 
         socket.on('sendMessage', function(payload) {
             Chat.sendMessage(socket, payload);

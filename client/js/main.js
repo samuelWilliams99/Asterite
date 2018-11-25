@@ -1,3 +1,6 @@
+
+var pendingName = null;
+username = null;
 socket.on('leaderboardUpdate', function(scores) {
     updateLeaderboard(scores);
 });
@@ -9,10 +12,12 @@ socket.on('joinError', function(errorMessage) {
 });
 
 socket.on('joinSuccess', function() {
+    username = pendingName;
     $('#player-name-dialog, #join-error').addClass('hidden');
 });
 
 $(function() {
+    $("html").on("contextmenu",function(e){ return false; });
     // updateLeaderboard([
     //     { name: 'Tim', color: 'red', score: '5000' },
     //     { name: 'Inigo', color: 'blue', score: '500' },
@@ -29,6 +34,7 @@ $(function() {
 function joinGame(e) {
     e.preventDefault();
     var name = document.getElementById('userName').value;
+    pendingName = name;
     socket.emit('playerJoin', name);
 }
 
