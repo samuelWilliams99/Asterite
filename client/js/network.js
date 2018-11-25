@@ -3,8 +3,6 @@ socket.on("asteroidCreate", function(asteroidData){
 	if(idx >= 0){
 		pendingAsteroids.splice(idx, 1);
 	}
-	console.log(typeof(asteroidData));
-	console.log("helloworld")
     createAsteroid(asteroidData);
 });
 
