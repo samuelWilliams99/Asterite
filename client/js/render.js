@@ -115,17 +115,15 @@ function renderRadar(radarSize, radarPos){
                 player.lastPositionLifetime -= 1;
             }
 
-            var relativePositionPlayer = [player.body.position[0] * scaleMult, player.body.position[1]*scaleMult];
+            var relativePositionPlayer = [player.lastPosition[0] * scaleMult, player.lastPosition[1] * scaleMult];
             var distance = dist(0, 0, relativePositionPlayer[0], relativePositionPlayer[1])
             var direction = [relativePositionPlayer[0] / distance, relativePositionPlayer[1] / distance];
             var newDistance = Math.min(distance, (radarSize / 2));
 
             relativePositionPlayer = [direction[0] * newDistance, direction[1] * newDistance];
 
-            if (dist(0, 0, relativePositionPlayer[0], relativePositionPlayer[1]) < radarSize/2.1){
-                stroke(255, 0, 0, player.lastPositionLifetime / (300 / 5) * 255);
-                ellipse(radarPos[0]+relativePositionPlayer[0], radarPos[1]+relativePositionPlayer[1], 2, 2);
-            }
+            stroke(255, 0, 0, player.lastPositionLifetime / (300 / 5) * 255);
+            ellipse(radarPos[0]+relativePositionPlayer[0], radarPos[1]+relativePositionPlayer[1], 2, 2);
         }
     }
 
