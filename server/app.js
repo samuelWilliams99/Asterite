@@ -34,7 +34,7 @@ function server() {
         socket.viewPos = viewPos;
         socket.on('playerJoin', function(name) {
             console.log('New player name \n>', name);
-            var ply = new Player(name);
+            var ply = new Player(socket, name, gameWorld);
             console.log(ply.color);
         });
 
