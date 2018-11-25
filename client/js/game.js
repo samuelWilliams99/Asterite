@@ -43,6 +43,7 @@ function updatePlayer(playerData){
 		player.body.angularVelocity = playerData.body.angularVelocity;
 		player.score = playerData.score;
 		player.powerups = playerData.powerups;
+		player.thrusting = playerData.thrusting;
 		return true;
 	} else {
 		return false;
