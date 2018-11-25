@@ -3,8 +3,8 @@ socket.on('leaderboardUpdate', function(scores){
 });
 
 $(function(){
-    updateLeaderboard([{name: "Tim", score: "50000"}, {name: "Joshua", score: "500"}]);
-    updateKillfeed({killer: "Tim", killed: "Joshua", weapon: "Skittles"});
+    updateLeaderboard([{name: "Tim", color:"red", score: "5000"}, {name: "Inigo", color:"blue", score: "500"}, {name: "Sam", color:"green", score: "50"}, {name: "Joshua", color:"pink", score: "5"}]);
+    updateKillfeed({killer:{name: "Tim", color:"red"}, killed:{name: "Joshua", color:"pink"}, weapon: "Skittles"});
 });
 
 function joinGame(e){
@@ -29,11 +29,21 @@ function togglePane(e){
 function updateLeaderboard(scores){
     var tableString = "";
     for(var i = 0; i < scores.length; i++){
+        if(i==0){
+            myColor="#e09e1a";
+        }else if(i==1){
+            myColor="#719eb7";
+        }else if(i==2){
+            myColor = "#ad6114";
+        }else{
+            myColor = "white";
+        }
         tableString += "<tr>";
-        tableString += "<td class=\"pos\">" + (i+1)+"." + "</td>";
-        tableString += "<td class=\"name\">" + scores[i].name + "</td>";
-        tableString += "<td class=\"score\">" + scores[i].score + "</td>";
+        tableString += "<td class=\"pos\" style=\"color:"+ myColor +"\">" + (i+1)+"." + "</td>";
+        tableString += "<td class=\"name\" style=\"color:"+ scores[i].color +"\">" + scores[i].name + "</td>";
+        tableString += "<td class=\"score\" style=\"color:"+ myColor +"\">" + scores[i].score + "</td>";
         tableString += "</tr>";
+        
     }
 
     document.getElementById("leaderboard__table").innerHTML = tableString;						
@@ -41,8 +51,10 @@ function updateLeaderboard(scores){
 
 function updateKillfeed(killObj){
     document.getElementById("killfeed__text").innerHTML = "<span id=\"killer__span\"></span> -> <span id=\"killed__span\"></span> with <span id=\"weapon__span\"></span>";
-    document.getElementById("killer__span").innerHTML = killObj.killer;
-    document.getElementById("killed__span").innerHTML = killObj.killed;
+    document.getElementById("killer__span").innerHTML = killObj.killer.name;
+    document.getElementById("killer__span").style.color = killObj.killer.color;
+    document.getElementById("killed__span").innerHTML = killObj.killed.name;
+    document.getElementById("killed__span").style.color = killObj.killed.color;
     document.getElementById("weapon__span").innerHTML = killObj.weapon;
 
 }
