@@ -20,6 +20,7 @@ function renderBodies(){
         drawObject(ply.shapeVertices);
         drawThrust(ply);
         pop();
+        ply.particles.run();
     }
 }
 
@@ -146,9 +147,11 @@ function drawThrust(player){
             vertex(thrustVertices[i][0], thrustVertices[i][1]);
         }
         endShape();
+        var speed = 10;
+        var rndInt = (getRandomInt(-10, 10)+90) * Math.PI / 180;
+        player.particles.addParticle(createVector(player.body.position[0]+width/2, player.body.position[1]+height/2), createVector(speed*Math.cos(player.body.angle+rndInt), speed*Math.sin(player.body.angle+rndInt)));
     }
 }
-
 
 function getRandomInt(min, max) {
     min = Math.ceil(min);
