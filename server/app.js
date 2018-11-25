@@ -34,10 +34,17 @@ function server() {
         var viewPos = [gameWorld.worldSize / 2, gameWorld.worldSize / 2];
         socket.viewPos = viewPos;
         socket.on('playerJoin', function(name) {
-            console.log('New player name \n>', name);
-            var ply = new Player(socket, name, gameWorld);
-            ply.setScore(0);
-            console.log(ply.color);
+            if (typeof players[name] !== 'undefined') {
+                socket.emit('joinError', 'This name is taken!');
+            } else if (name.trim() === '') {
+                socket.emit('joinError', 'Name must not be empty');
+            } else {
+                console.log(name + ' joined the game!');
+                var ply = new Player(socket, name, gameWorld);
+                ply.setScore(0);
+                socket.emit('joinSuccess');
+                Leaderboard.update();
+            }
         });
 
         socket.on('asteroidRequestData', function(ids) {
@@ -46,6 +53,15 @@ function server() {
             for (var i = 0; i < ids.length; i++) {
                 var ast = Asteroids[ids[i]];
                 socket.emit('asteroidCreate', ast.sendObj());
+            }
+        });
+
+        socket.on('playerRequestData', function(names) {
+            console.log('player request');
+            console.log(names);
+            for (var i = 0; i < names.length; i++) {
+                var ply = players[names[i]];
+                socket.emit('playerCreate', ply.sendObj());
             }
         });
 
