@@ -56,6 +56,15 @@ function server() {
             }
         });
 
+        socket.on('playerRequestData', function(names) {
+            console.log('player request');
+            console.log(names);
+            for (var i = 0; i < names.length; i++) {
+                var ply = players[names[i]];
+                socket.emit('playerCreate', ply.sendObj());
+            }
+        });
+
         socket.on('sendMessage', function(payload) {
             Chat.sendMessage(socket, payload);
         });

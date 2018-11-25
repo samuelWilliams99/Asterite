@@ -38,12 +38,12 @@ socket.on("physUpdate", function(data){
 	var unknownPlayers = [];
 	for(var i=0; i<data.players.length; i++){
 		var ply = data.players[i];
-		if(pendingPlayers.indexOf(ply.id) >= 0) {
+		if(pendingPlayers.indexOf(ply.name) >= 0) {
 			continue;
 		}
 		if(!updatePlayer(ply)){
-			unknownPlayers.push(ply.id);
-			pendingPlayers.push(ply.id);
+			unknownPlayers.push(ply.name);
+			pendingPlayers.push(ply.name);
 		}
 	}
 	if(unknownPlayers.length > 0){
