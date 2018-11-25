@@ -33,6 +33,7 @@ function drawObject(vertices) {
 
 var angle = 0;
 var offset = 2;
+
 function renderRadar(radarSize, radarPos){
     var opacity = 255;
     strokeWeight(3);
@@ -45,18 +46,49 @@ function renderRadar(radarSize, radarPos){
         rotate((angle-i*offset) * Math.PI / 180);
         line(0, 0, 0, 0-radarSize/2);
         pop();
+
     }
     angle = betterMod((angle + 5), 360);
-    strokeWeight(1);
+
+    strokeWeight(5);
 
     stroke(0,255,0);
     for (var key in Asteroids){
         asteroid = Asteroids[key];
-        var relativePosition = [asteroid.body.position[0]*scaleMult, asteroid.body.position[1]*scaleMult]
+        var asteroidAngle = atan(asteroid.lastPosition[0] / asteroid.lastPosition[1]);
+        asteroidAngle = asteroidAngle * 180 / Math.PI;
+        if (asteroid.lastPosition[1] < 0){
+            asteroidAngle += 180;
+        }
+
+        asteroidAngle = 360 - asteroidAngle;
+        asteroidAngle = (asteroidAngle + 180) % 360;
+
+        if(asteroidAngle < 0){
+            console.log(asteroidAngle);
+        }
+
+        if (asteroidAngle <= angle && asteroidAngle >= angle -6){
+            asteroid.lastPosition = asteroid.body.position;
+            asteroid.lastPositionLifetime = 300 / 5;
+        }
+        
+        if (asteroid.lastPositionLifetime == 0){
+            continue;
+        } else {
+            asteroid.lastPositionLifetime -= 1;
+        }
+        
+        // var relativePosition = [asteroid.body.position[0]*scaleMult, asteroid.body.position[1]*scaleMult]
+        var relativePosition = [asteroid.lastPosition[0]*scaleMult, asteroid.lastPosition[1]*scaleMult]
         if (dist(0, 0, relativePosition[0], relativePosition[1]) < radarSize/2.1){
+            stroke(255, 100, 100, asteroid.lastPositionLifetime / (300 / 5) * 255);
             ellipse(radarPos[0]+relativePosition[0], radarPos[1]+relativePosition[1], 2, 2);
         }
     }
+    strokeWeight(1);
+
+
 }
 
 function betterMod(a, b){
