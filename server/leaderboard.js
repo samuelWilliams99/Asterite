@@ -11,7 +11,7 @@ function getNewLeaderboard(length) {
     });
     scores.sort((a, b) => b.score - a.score);
 
-    return scores.slice(0, length - 1);
+    return scores.slice(0, length);
 }
 
 function update() {
