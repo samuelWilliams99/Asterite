@@ -23,7 +23,7 @@ function Player(socket, name, World) {
     socket.name = name;
     this.body = new p2.Body({
         mass: 10,
-        position: [this.World.worldSize / 2, this.World.worldSize / 2],
+        position: [this.World.worldSize / 2 + getRandomInt(-800, 800), this.World.worldSize / 2 + getRandomInt(-800, 800)],
         //position: [getRandomInt(100,1800), 500],
         angle: 0,
         velocity: [0, 0],

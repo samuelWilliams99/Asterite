@@ -24,7 +24,7 @@ function World(){
             }
         }
     })
-    this.worldSize = 30000;
+    this.worldSize = 8000;
 	this.createMaterials(new p2.Material());
 };
 
