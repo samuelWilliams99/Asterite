@@ -15,6 +15,12 @@ function getHSL() {
     return `hsl(${h},${s}%,${l}%)`;
 }
 
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function Player(socket, name, World) {
     this.socket = socket;
     socket.first = false;
