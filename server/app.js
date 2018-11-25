@@ -36,7 +36,7 @@ function server() {
         socket.on('playerJoin', function(name) {
             console.log('New player name \n>', name);
             var ply = new Player(socket, name, gameWorld);
-            ply.setScore(200);
+            ply.setScore(0);
             console.log(ply.color);
         });
 
