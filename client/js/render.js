@@ -18,6 +18,7 @@ function renderBodies(){
         translate(ply.body.position[0] + width/2, ply.body.position[1] + height/2);
         rotate(ply.body.angle);
         drawObject(ply.shapeVertices);
+        drawThrust(ply);
         pop();
     }
 }
@@ -97,4 +98,24 @@ function renderRadar(radarSize, radarPos){
 
 function betterMod(a, b){
     return ((a % b) + b) % b;
+}
+
+function drawThrust(player){
+    thrustVertices = [[-8, 8], [0, getRandomInt(16, 22)], [8, 8]];
+    if (player.thrusting){
+        fill(255, getRandomInt(50, 200), 0);
+        stroke(255, getRandomInt(50, 200), 0);
+        beginShape();
+        for (var i = 0; i < thrustVertices.length; i++){
+            vertex(thrustVertices[i][0], thrustVertices[i][1]);
+        }
+        endShape();
+    }
+}
+
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
