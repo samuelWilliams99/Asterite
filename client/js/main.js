@@ -86,7 +86,6 @@ function updateLeaderboard(scores) {
     document.getElementById('leaderboard__table').innerHTML = tableString;
 }
 
-<<<<<<< HEAD
 function updateKillfeed(killObj){
     document.getElementById("killfeed__text").innerHTML = "<span id=\"killer__span\"></span> -> <span id=\"killed__span\"></span> with <span id=\"weapon__span\"></span>";
     document.getElementById("killer__span").innerHTML = killObj.killer.name;
@@ -109,14 +108,3 @@ function submitChat(e){
     console.log(message);
     socket.emit('sendMessage', message);
 }
-=======
-function updateKillfeed(killObj) {
-    document.getElementById('killfeed__text').innerHTML =
-        '<span id="killer__span"></span> -> <span id="killed__span"></span> with <span id="weapon__span"></span>';
-    document.getElementById('killer__span').innerHTML = killObj.killer.name;
-    document.getElementById('killer__span').style.color = killObj.killer.color;
-    document.getElementById('killed__span').innerHTML = killObj.killed.name;
-    document.getElementById('killed__span').style.color = killObj.killed.color;
-    document.getElementById('weapon__span').innerHTML = killObj.weapon;
-}
->>>>>>> 315374e6d3f8121d231568935dbcccbcf9d5f071
