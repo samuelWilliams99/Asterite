@@ -13,6 +13,8 @@ function setup(){
     lastTimeSeconds = 0;
     angleMode(RADIANS);
 
+    keysDown = {left: false, right: false}
+
     createCanvas(window.innerWidth, window.innerHeight);
 }
 
@@ -36,6 +38,51 @@ function draw(){
     }
 
     stroke(0,255,0);
-    fill(0,255,0);
     renderRadar(radarSize, radarPos);
+
+    if(username){
+        var dx = mouseX - width/2;
+        var dy = mouseY - height/2
+        var mouseAng = Math.atan(dx / dy);
+        if(dy < 0){
+            mouseAng += Math.PI;
+        }
+
+        mouseAng = (Math.PI*2) - mouseAng;
+        mouseAng = (mouseAng + Math.PI) % (Math.PI*2);
+
+
+        tryFace(mouseAng);
+        sendKeys();
+        if(keysDown && keysDown.left && Players[username]){
+            var mag = 100;
+            Players[username].body.applyForce([mag * Math.cos(Players[username].body.angle), mag*Math.sin(Players[username].body.angle)]);
+
+        }
+    }
+
+}
+
+function sendKeys() {
+    socket.emit("playerSendKeys", username, keysDown);
+}
+
+function tryFace(ang){
+    socket.emit("playerTryFace", username, ang);
+}
+
+function mousePressed(){
+    if(mouseButton == "left"){
+        keysDown.left = true;
+    } else if(mouseButton == "right") {
+        keysDown.right = true;
+    }
+}
+
+function mouseReleased(){
+    if(mouseButton == "left"){
+        keysDown.left = false;
+    } else if(mouseButton == "right") {
+        keysDown.right = false;
+    }
 }
