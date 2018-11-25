@@ -1,9 +1,21 @@
 .chat__style {
-    font-size:12px;
+    font-size:14px;
+    text-align: left;
+    padding-left:5%;
+    margin-top:5px;
+    margin-bottom: 5px;
+    word-wrap: break-word;
+    max-width: 250px;
 }
 
 
 .small-padding-input {
     box-sizing: border-box;
+    text-align: right;
     width: 90%;
+}
+
+.output-chat__text {
+    text-align: left;
+    padding-bottom: 200px;
 }

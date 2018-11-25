@@ -99,10 +99,12 @@ socket.on('playerKilled', function updateKillfeed(killObj){
 
 socket.on('chatUpdate', function(m){
     message = "";
+    
+
     for(var i = 0; i < m.length; i++){
         var userColor = m[i].color;
         var name = m[i].name;
-        message = message +"<p class=\"chat__style\" style=color:"+userColor+";>"+ name + ": " + m[i].message + "</p>";
+        message = message +"<p class=\"chat__style\"><span style=color:"+userColor+";>" + name + ":</span> " + m[i].message + "</p>";
     }
     
     document.getElementById('output-chat__text').innerHTML = message;
@@ -114,3 +116,5 @@ function submitChat(e){
     document.getElementById('input-chat__text').value = "";
     socket.emit('sendMessage', m);
 }
+
+
