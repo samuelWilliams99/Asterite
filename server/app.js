@@ -84,5 +84,10 @@ function server() {
         socket.on('sendMessage', function(payload) {
             Chat.sendMessage(socket, payload);
         });
+
+        // socket.on('chatUpdate', function(payload){
+        //     updateChat(payload);
+        //     console.log("Hi");
+        // });
     });
 }

@@ -1,5 +1,6 @@
 
 var pendingName = null;
+
 username = null;
 socket.on('leaderboardUpdate', function(scores) {
     updateLeaderboard(scores);
@@ -97,14 +98,18 @@ function updateKillfeed(killObj){
 }
 
 
-function updateChat(m){
-    console.log(m);
-}
+socket.on('chatUpdate', function(m){
+    message = "";
+    for(var i = 0; i < m.length; i++){
+        message = message +"<p>"+ m[i] + "</p>";
+    }
+    
+    document.getElementById('output-chat__text').innerHTML = message;
+});
 
 function submitChat(e){
     e.preventDefault();
-    var message = document.getElementById('input-chat__text').value;
+    m = document.getElementById('input-chat__text').value; 
     document.getElementById('input-chat__text').value = "";
-    console.log(message);
-    socket.emit('sendMessage', message);
+    socket.emit('sendMessage', m);
 }
