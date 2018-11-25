@@ -61,7 +61,6 @@ function renderRadar(radarSize, radarPos){
 
     strokeWeight(5);
 
-    stroke(0,255,0);
     for (var key in Asteroids){
         asteroid = Asteroids[key];
         var asteroidAngle = atan(asteroid.lastPosition[0] / asteroid.lastPosition[1]);
@@ -84,13 +83,52 @@ function renderRadar(radarSize, radarPos){
             asteroid.lastPositionLifetime -= 1;
         }
         
-        // var relativePosition = [asteroid.body.position[0]*scaleMult, asteroid.body.position[1]*scaleMult]
-        var relativePosition = [asteroid.lastPosition[0]*scaleMult, asteroid.lastPosition[1]*scaleMult]
-        if (dist(0, 0, relativePosition[0], relativePosition[1]) < radarSize/2.1){
-            stroke(255, 100, 100, asteroid.lastPositionLifetime / (300 / 5) * 255);
-            ellipse(radarPos[0]+relativePosition[0], radarPos[1]+relativePosition[1], 2, 2);
+        var relativePositionAsteroid = [asteroid.lastPosition[0]*scaleMult, asteroid.lastPosition[1]*scaleMult]
+        
+        if (dist(0, 0, relativePositionAsteroid[0], relativePositionAsteroid[1]) < radarSize/2.1){
+            stroke(255, 255, 255, asteroid.lastPositionLifetime / (300 / 5) * 255);
+            ellipse(radarPos[0]+relativePositionAsteroid[0], radarPos[1]+relativePositionAsteroid[1], 2, 2);
         }
     }
+
+    for (var key in Players){
+        if (key != username){
+            player = Players[key];
+
+            var playerAngle = atan(player.lastPosition[0] / player.lastPosition[1]);
+            playerAngle = playerAngle * 180 / Math.PI;
+            if (player.lastPosition[1] < 0){
+                playerAngle += 180;
+            }
+    
+            playerAngle = 360 - playerAngle;
+            playerAngle = (playerAngle + 180) % 360;
+    
+            if (playerAngle <= angle && playerAngle >= angle -6){
+                player.lastPosition = player.body.position;
+                player.lastPositionLifetime = 300 / 5;
+            }
+            
+            if (player.lastPositionLifetime == 0){
+                continue;
+            } else {
+                player.lastPositionLifetime -= 1;
+            }
+
+            var relativePositionPlayer = [player.body.position[0] * scaleMult, player.body.position[1]*scaleMult];
+            var distance = dist(0, 0, relativePositionPlayer[0], relativePositionPlayer[1])
+            var direction = [relativePositionPlayer[0] / distance, relativePositionPlayer[1] / distance];
+            var newDistance = Math.min(distance, (radarSize / 2));
+
+            relativePositionPlayer = [direction[0] * newDistance, direction[1] * newDistance];
+
+            if (dist(0, 0, relativePositionPlayer[0], relativePositionPlayer[1]) < radarSize/2.1){
+                stroke(255, 0, 0, player.lastPositionLifetime / (300 / 5) * 255);
+                ellipse(radarPos[0]+relativePositionPlayer[0], radarPos[1]+relativePositionPlayer[1], 2, 2);
+            }
+        }
+    }
+
     strokeWeight(1);
 
 
