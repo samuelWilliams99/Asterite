@@ -27,6 +27,7 @@ var Particle = function(position, ang) {
 ParticleSystem.prototype.addParticle = function(position, ang) {
     var newPart = new Particle(position, ang);
     newPart.sys = this;
+    newPart.velocity.add(arrToVec(this.player.body.velocity));
     this.particles.push(newPart);
     newPart.first = true;
 };
