@@ -89,12 +89,18 @@ function updateLeaderboard(scores) {
 }
 
 socket.on('playerKilled', function updateKillfeed(killObj){
-    document.getElementById("killfeed__text").innerHTML = "<span id=\"killer__span\"></span> -> <span id=\"killed__span\"></span> with <span id=\"weapon__span\"></span>";
-    document.getElementById("killer__span").innerHTML = killObj.killer.name;
-    document.getElementById("killer__span").style.color = killObj.killer.color;
+    if(killObj.killer.name == killObj.killed.name){
+        document.getElementById("killfeed__text").innerHTML = "<span id=\"killed__span\"></span> crashed into an <span id=\"weapon__span\">asteroid</span>";
+    }else{
+        document.getElementById("killfeed__text").innerHTML = "<span id=\"killer__span\"></span> -> <span id=\"killed__span\"></span> with <span id=\"weapon__span\"></span>";
+        document.getElementById("killer__span").innerHTML = killObj.killer.name;
+        document.getElementById("weapon__span").innerHTML = killObj.weapon;
+        document.getElementById("killer__span").style.color = killObj.killer.color;
+    }
+
     document.getElementById("killed__span").innerHTML = killObj.killed.name;
     document.getElementById("killed__span").style.color = killObj.killed.color;
-    document.getElementById("weapon__span").innerHTML = killObj.weapon;
+    
 });
 
 
