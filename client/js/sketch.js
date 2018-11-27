@@ -33,7 +33,12 @@ function draw(){
     lastTimeSeconds = lastTimeSeconds || timeSeconds;
     var timeSinceLastCall = timeSeconds - lastTimeSeconds;
     gameWorld.step(fixedTimeStep, timeSinceLastCall, maxSubSteps);
-    renderBodies();
+    if(username){
+        renderBodies(Players[username].rgbColor);
+    }else{
+        renderBodies([255,255,255]);
+    }
+    
     fill(0);
     strokeWeight(1);
     stroke(255);

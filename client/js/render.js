@@ -21,16 +21,17 @@ function renderBodies(){
         push();
         translate(ply.body.position[0] + width/2, ply.body.position[1] + height/2);
         rotate(ply.body.angle);
+        var rgb = ply.rgbColor;
+        stroke(rgb[0],rgb[1],rgb[2],255);
         drawObject(ply.shapeVertices);
         drawThrust(ply);
         pop();
         
-        console.log(ply.color);
-        console.log(ply.rgbColor);
-        var rgb = ply.rgbColor;
+        
         // Sets player to be fully visible and white (at the moment)
         stroke(rgb[0],rgb[1],rgb[2],255);
-        ply.particles.run();
+
+        ply.particles.run(ply.rgbColor);
 
     }
 }
@@ -136,8 +137,8 @@ function renderRadar(radarSize, radarPos){
             var newDistance = Math.min(distance, (radarSize / 2));
 
             relativePositionPlayer = [direction[0] * newDistance, direction[1] * newDistance];
-
-            stroke(255, 0, 0, player.lastPositionLifetime / (300 / 5) * 255);
+            
+            stroke(player.rgbColor[0], player.rgbColor[1], player.rgbColor[2], player.lastPositionLifetime / (300 / 5) * 255);
             ellipse(radarPos[0]+relativePositionPlayer[0], radarPos[1]+relativePositionPlayer[1], 2, 2);
         }
     }
