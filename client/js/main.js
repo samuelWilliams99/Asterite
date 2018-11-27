@@ -119,7 +119,7 @@ function submitChat(e){
 }
 
 
-function openStartDialg(score, name){
+function openStartDialog(score, name){
     $('#player-name-dialog').removeClass('hidden');
     document.getElementById("userName").value = name;
     document.getElementById("play-scored").innerHTML = "You scored "+ score;

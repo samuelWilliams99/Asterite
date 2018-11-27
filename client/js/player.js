@@ -21,6 +21,8 @@ function Player(world, playerData) {
     this.thrusting = playerData.thrusting;
     this.death = false;
 
+    this.particles = new ParticleSystem(createVector(0, 22));
+
     this.score = playerData.score;
     this.powerups = playerData.powerups;
     this.color = playerData.color;

@@ -6,6 +6,12 @@ var idCounter = 0;
 
 global.Asteroids = {};
 
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function Asteroid(World, size){
 	this.World = World;
 	this.world = World.world;
@@ -21,7 +27,7 @@ function Asteroid(World, size){
         angularDamping: 0,
         inertia: 150
 	});
-	this.shapeData = generateShapeData(size || 30);
+	this.shapeData = generateShapeData(size || 60);
 	this.shape = generateShape(this.shapeData);
 	this.body.addShape(this.shape);
 	this.world.addBody(this.body);
@@ -90,8 +96,3 @@ function generateShapeData(avg) {
     return ret;
 }
 
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
