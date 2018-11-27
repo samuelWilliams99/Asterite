@@ -24,6 +24,7 @@ function Player(world, playerData) {
     this.score = playerData.score;
     this.powerups = playerData.powerups;
     this.color = playerData.color;
+    this.rgbColor = playerData.rgbColor;
     this.name = playerData.name;
     this.lastPosition = this.body.position;
 	this.lastPositionLifetime = 0;

@@ -15,7 +15,8 @@ function renderBodies(){
     for (var key in Players){
         var ply = Players[key];
         if(ply.killed){
-            stroke(255,255,255,ply.killedTimeout * 2.55);
+            // Sets colour to white with an alpha to fade out
+            stroke(rgb[0],rgb[1],rgb[2],ply.killedTimeout * 2.55);
         }
         push();
         translate(ply.body.position[0] + width/2, ply.body.position[1] + height/2);
@@ -23,9 +24,17 @@ function renderBodies(){
         drawObject(ply.shapeVertices);
         drawThrust(ply);
         pop();
-        stroke(255,255,255,255);
+        
+        console.log(ply.color);
+        console.log(ply.rgbColor);
+        var rgb = ply.rgbColor;
+        // Sets player to be fully visible and white (at the moment)
+        stroke(rgb[0],rgb[1],rgb[2],255);
     }
 }
+
+
+
 
 function withinBox(pos, min, max){
 	if(pos[0] >= min[0] && pos[0] <= max[0]) {

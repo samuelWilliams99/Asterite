@@ -12,8 +12,49 @@ function getHSL() {
     var h = randomInt(0, 360);
     var s = randomInt(42, 98);
     var l = randomInt(40, 90);
-    return `hsl(${h},${s}%,${l}%)`;
+    var rgb = hslToRgb(h,s/100,l/100);
+    console.log(rgb);
+    return [`hsl(${h},${s}%,${l}%)`, rgb];
+    
 }
+
+// https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
+function hslToRgb(h, s, l){
+    var r, g, b;
+
+    if(s == 0){
+        r = g = b = l; // achromatic
+    }else{
+        var hue2rgb = function hue2rgb(p, q, t){
+            // 
+            if(t < 0) t += 1;
+            if(t > 1) t -= 1;
+            if(t < 1/6) return p + (q - p) * 6 * t;
+            if(t < 1/2) return q;
+            if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+            return p;
+        }
+
+        // If luminance less than 50% then luminance * (1+saturation) else just saturation+luminance
+        var temp_1 = l < 0.5 ? l * (1 + s) : l + s - l * s;
+
+        // 2 * Luminance - temp_1
+        var temp_2 = 2 * l - temp_1;
+
+        // Convert by dividing by 360
+        var hue = h/360;
+
+        var newRgb = [hue2rgb(temp_2, temp_1, hue + 0.333), hue2rgb(temp_2, temp_1, hue), hue2rgb(temp_2, temp_1, hue-0.333)];
+        r = newRgb[0];
+        g = newRgb[1];
+        b = newRgb[2];
+               
+    }
+
+    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
+
+
 
 function Player(socket, name, World) {
     this.socket = socket;
@@ -41,7 +82,11 @@ function Player(socket, name, World) {
 
     this.score = 0;
     this.powerups = '';
-    this.color = getHSL();
+    var colorsArray = getHSL();
+
+    this.color = colorsArray[0];
+    this.rgbColor = colorsArray[1];
+
     this.name = name;
     this.killed = false;
     this.killedTimeout = 100;
@@ -62,6 +107,7 @@ Player.prototype.sendObj = function() {
         score: this.score,
         name: this.name,
         color: this.color,
+        rgbColor: this.rgbColor,
         thrusting: this.thrusting,
         killed: this.killed,
         killedTimeout: this.killedTimeout
