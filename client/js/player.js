@@ -21,12 +21,17 @@ function Player(world, playerData) {
     this.thrusting = playerData.thrusting;
     this.death = false;
 
-    this.particles = new ParticleSystem(createVector(0, 22));
-    this.dragging = playerData.dragging;
+    
 
+    this.dragging = playerData.dragging;
     this.score = playerData.score;
     this.powerups = playerData.powerups;
     this.color = playerData.color;
+
+    this.rgbColor = playerData.rgbColor;
+
+    this.particles = new ParticleSystem(createVector(0, 22), this.rgbColor);
+
     this.name = playerData.name;
     this.lastPosition = this.body.position;
 	this.lastPositionLifetime = 0;

@@ -34,6 +34,7 @@ function draw(){
     var timeSinceLastCall = timeSeconds - lastTimeSeconds;
     gameWorld.step(fixedTimeStep, timeSinceLastCall, maxSubSteps);
     renderBodies();
+
     fill(0);
     strokeWeight(1);
     stroke(255);

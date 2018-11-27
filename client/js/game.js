@@ -37,7 +37,11 @@ function createPlayer(playerData){
 function removePlayer(name){
     
 	if(Players[name]){
-		openStartDialog(Players[name].score, name);
+
+		if(name == username){
+			openStartDialog(Players[name].score, name);
+		}
+
 		gameWorld.removeBody(Players[name].body);
 		delete Players[name];
 		if(username == name){
@@ -59,6 +63,7 @@ function updatePlayer(playerData){
 		player.killed = playerData.killed;
 		player.killedTimeout = playerData.killedTimeout;
 		player.dragging = playerData.dragging;
+
 		return true;
 	} else {
 		return false;

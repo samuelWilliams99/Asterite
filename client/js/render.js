@@ -1,4 +1,6 @@
+
 function renderBodies(){
+
     for (var key in Asteroids){
         asteroid = Asteroids[key];
         if (!withinBox(asteroid.body.position, [-2000, -2000], [2000, 2000])){
@@ -14,12 +16,17 @@ function renderBodies(){
     };
     for (var key in Players){
         var ply = Players[key];
+
+        var alpha = 255;
         if(ply.killed){
-            stroke(255,255,255,ply.killedTimeout * 2.55);
+            // Sets colour to white with an alpha to fade out
+            alpha = ply.killedTimeout * 2.55;
         }
         push();
         translate(ply.body.position[0] + width/2, ply.body.position[1] + height/2);
         rotate(ply.body.angle);
+        var rgb = ply.rgbColor;
+        stroke(rgb[0],rgb[1],rgb[2],alpha);
         drawObject(ply.shapeVertices);
         drawThrust(ply);
         pop();
@@ -35,6 +42,7 @@ function renderBodies(){
             }
         }
         strokeWeight(1);
+        stroke(rgb[0],rgb[1],rgb[2],alpha);
         ply.particles.run();
         stroke(255,255,255,255);
     }
@@ -138,8 +146,8 @@ function renderRadar(radarSize, radarPos){
             var newDistance = Math.min(distance, (radarSize / 2));
 
             relativePositionPlayer = [direction[0] * newDistance, direction[1] * newDistance];
-
-            stroke(255, 0, 0, player.lastPositionLifetime / (300 / 5) * 255);
+            
+            stroke(player.rgbColor[0], player.rgbColor[1], player.rgbColor[2], player.lastPositionLifetime / (300 / 5) * 255);
             ellipse(radarPos[0]+relativePositionPlayer[0], radarPos[1]+relativePositionPlayer[1], 2, 2);
         }
     }

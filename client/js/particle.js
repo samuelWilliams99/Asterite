@@ -1,6 +1,7 @@
-var ParticleSystem = function(position) {
+var ParticleSystem = function(position, rgb) {
     this.origin = position.copy();
     this.particles = [];
+    this.rgb = rgb;
 };
 
 // A simple Particle class
@@ -17,12 +18,13 @@ ParticleSystem.prototype.addParticle = function(position, velocity) {
     this.particles.push(newPart);
 };
 
-ParticleSystem.prototype.run = function() {
+
+ParticleSystem.prototype.run = function(rgb) {
     for (var i = this.particles.length-1; i >= 0; i--) {
         var p = this.particles[i];
-        p.run();
+        p.run(this.rgb);
         if (p.isDead()) {
-        this.particles.splice(i, 1);
+            this.particles.splice(i, 1);
         }
     }
 };
@@ -40,14 +42,15 @@ Particle.prototype.isDead = function(){
 };
 
 // Method to display
-Particle.prototype.display = function() {
-    stroke(200, this.lifespan);
+
+Particle.prototype.display = function(rgb) {
+    stroke(rgb[0],rgb[1],rgb[2], this.lifespan);
     strokeWeight(2);
-    fill(127, this.lifespan);
+    fill(rgb[0],rgb[1],rgb[2], this.lifespan);
     ellipse(this.position.x, this.position.y, 5, 5);
 };
 
-Particle.prototype.run = function() {
+Particle.prototype.run = function(rgb) {
     this.update();
-    this.display();
+    this.display(rgb);
 };
