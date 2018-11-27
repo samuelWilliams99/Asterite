@@ -14,15 +14,16 @@ function renderBodies(rgb){
     };
     for (var key in Players){
         var ply = Players[key];
+        var alpha = 255;
         if(ply.killed){
             // Sets colour to white with an alpha to fade out
-            stroke(rgb[0],rgb[1],rgb[2],ply.killedTimeout * 2.55);
+            alpha = ply.killedTimeout * 2.55;
         }
         push();
         translate(ply.body.position[0] + width/2, ply.body.position[1] + height/2);
         rotate(ply.body.angle);
         var rgb = ply.rgbColor;
-        stroke(rgb[0],rgb[1],rgb[2],255);
+        stroke(rgb[0],rgb[1],rgb[2],alpha);
         drawObject(ply.shapeVertices);
         drawThrust(ply);
         pop();

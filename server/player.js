@@ -195,11 +195,12 @@ function d(ang) {
 }
 
 Player.prototype.remove = function() {
-    Leaderboard.update();
     io.emit('playerRemove', this.name);
     this.socket.name = null;
     delete players[this.name];
     this.world.removeBody(this.body);
+
+    Leaderboard.update();
 };
 
 Player.prototype.setScore = function(score) {
