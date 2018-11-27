@@ -30,7 +30,7 @@ function Player(world, playerData) {
 
     this.rgbColor = playerData.rgbColor;
 
-    this.particles = new ParticleSystem(createVector(0, 22), this.rgbColor);
+    this.particles = new ParticleSystem(createVector(0, 22), this);
 
     this.name = playerData.name;
     this.lastPosition = this.body.position;

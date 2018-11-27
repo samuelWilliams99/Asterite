@@ -1,3 +1,7 @@
+socket.on("reconnect_attempt", function(){
+	location.reload();
+});
+
 socket.on("asteroidCreate", function(asteroidData){
 	var idx = pendingAsteroids.indexOf(asteroidData.id);
 	if(idx >= 0){
