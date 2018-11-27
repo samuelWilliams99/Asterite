@@ -1,4 +1,4 @@
-function renderBodies(){
+function renderBodies(rgb){
     for (var key in Asteroids){
         asteroid = Asteroids[key];
         if (!withinBox(asteroid.body.position, [-2000, -2000], [2000, 2000])){

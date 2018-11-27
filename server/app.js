@@ -33,11 +33,26 @@ function server() {
         
     }, fixedTimeStep * 1000);
 
+
+    
+
     io.on('connection', function(socket) {
     	socket.first = true;
         Leaderboard.update();
         var viewPos = [gameWorld.worldSize / 2, gameWorld.worldSize / 2];
         socket.viewPos = viewPos;
+        
+        socket.on('disconnect', function(){
+            console.log('Disconnect');
+            console.log(players);
+            // console.log(socket);
+            if(socket.name != null){
+                // console.log(socket);
+                console.log(">>" + socket.name);
+                players[socket.name].remove();
+            }
+        });
+
         socket.on('playerJoin', function(name) {
             if (typeof players[name] !== 'undefined') {
                 socket.emit('joinError', 'This name is taken!');
@@ -49,8 +64,10 @@ function server() {
                 ply.setScore(0);
                 socket.emit('joinSuccess');
                 Leaderboard.update();
-            }
+            }           
         });
+
+        
 
         socket.on('asteroidRequestData', function(ids) {
             console.log('asteroid request');
@@ -89,9 +106,5 @@ function server() {
             Chat.sendMessage(socket, payload);
         });
 
-        // socket.on('chatUpdate', function(payload){
-        //     updateChat(payload);
-        //     console.log("Hi");
-        // });
     });
 }
