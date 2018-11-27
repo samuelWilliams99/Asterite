@@ -34,7 +34,9 @@ function draw(){
     var timeSinceLastCall = timeSeconds - lastTimeSeconds;
     gameWorld.step(fixedTimeStep, timeSinceLastCall, maxSubSteps);
     if(username){
-        renderBodies(Players[username].rgbColor);
+        if(Players[username]){
+            renderBodies(Players[username].rgbColor);
+        }
     }else{
         renderBodies([255,255,255]);
     }
