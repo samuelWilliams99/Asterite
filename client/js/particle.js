@@ -9,16 +9,23 @@ var ParticleSystem = function(position, player) {
 };
 
 // A simple Particle class
-var Particle = function(position, velocity) {
+var Particle = function(position, ang) {
     this.acceleration = createVector(0, 0.05);
     this.position = position.copy();
-    this.velocity = velocity;
-    this.position.add(velocity.copy().mult(2));
+
+    var speed = getRandomInt(8,12);
+    var angRange = 20;
+    
+    var rndAng = (getRandomInt(-angRange, angRange)) * Math.PI / 180;
+    this.velocity = createVector(speed*Math.cos(ang+rndAng), speed*Math.sin(ang+rndAng));
+    var offset = createVector(speed*2*Math.cos(ang+rndAng), speed*2*Math.sin(ang+rndAng));
+    
+    this.position.add(offset);
     this.lifespan = 200;
 };
 
-ParticleSystem.prototype.addParticle = function(position, velocity) {
-    var newPart = new Particle(position, velocity);
+ParticleSystem.prototype.addParticle = function(position, ang) {
+    var newPart = new Particle(position, ang);
     newPart.sys = this;
     this.particles.push(newPart);
     newPart.first = true;
