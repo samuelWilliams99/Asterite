@@ -27,6 +27,7 @@ function renderBodies(){
         rotate(ply.body.angle);
         var rgb = ply.rgbColor;
         stroke(rgb[0],rgb[1],rgb[2],alpha);
+        // fill(rgb[0],rgb[1],rgb[2],alpha);
         drawObject(ply.shapeVertices);
         drawThrust(ply);
         pop();
