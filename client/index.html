@@ -4,6 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+		<!-- Import the stylesheets needed in the program -->
 		<base href="/">
 		<link rel = 'stylesheet' href = './css/dialog.css' type = 'text/css'/>
 		<link rel = 'stylesheet' href = './css/killfeed.css' type = 'text/css'/>
@@ -11,17 +13,19 @@
 		<link rel = 'stylesheet' href = './css/rightPane.css' type = 'text/css'/>
 		<link rel = 'stylesheet' href = './css/index.css' type = 'text/css'/>
 		<link rel = 'stylesheet' href = './css/chat.css' type = 'text/css'/>
+
+		<!-- Import the icon for the taskbar -->
 		<link rel="icon" href = './images/favicon.ico'/>
+
+		<!-- Imports the required fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Chakra+Petch" rel="stylesheet">
+		<link href="./css/materialIcons.css" rel="stylesheet" type="text/css">
+
+		<!-- Imports the required scripts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
 		<script src="./js/lib/p2.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Chakra+Petch" rel="stylesheet">
-		<link href="./css/materialIcons.css" rel="stylesheet" type="text/css">
-        <title>Asterite</title>
-        <script>
-            var socket = io();
-        </script>
         <script src="./js/main.js"></script>
         <script src="./js/particle.js"></script>
         <script src="./js/game.js"></script>
@@ -29,11 +33,18 @@
         <script src="./js/render.js"></script>
         <script src="./js/asteroid.js"></script>
         <script src="./js/sketch.js"></script>
-        <script src="./js/player.js"></script>
-    </head>
+		<script src="./js/player.js"></script>
+		<script>
+            var socket = io();
+		</script>
+		
+		<title>Asterite</title>
+	</head>
+	
     <body>
         <div class="container">
 			
+			<!-- Creates the name input box -->
 			<div class = "dialog view" id = "player-name-dialog">
 				<div class="menu-screen">
 					<h2>Asterite</h2>
@@ -46,6 +57,7 @@
 				</div>
 			</div>
 			
+			<!-- Creates the buttons to show/hide the boxes within a sidebar -->
 			<div class="button-bar view">
 				<div onclick="togglePane(event)" data-target-view="leaderboard" id="leaderboard__button" class="btn"><i class="material-icons">list</i></div>
 				<div onclick="togglePane(event)" data-target-view="chat" id="chat__button"  class="btn"><i class="material-icons">message</i></div>
@@ -54,6 +66,7 @@
 
 			<div id="right-pane">
 				
+				<!-- This is where the leaderboard is created -->
 				<div id="leaderboard-container">
 					<div id = "leaderboard" class="view">
 						<h2>Leaderboard</h2>
@@ -64,6 +77,7 @@
 					</div>
 				</div>
 
+				<!-- This is where the chat box is created -->
 				<div id="chat-container">
 					<div id="chat" class="view">
 						<h2>Chat</h2>
@@ -75,6 +89,7 @@
 					</div>
 				</div>
 
+				<!-- This is where the killfeed is created -->
 				<div id="killfeed-container">
 					<div id="killfeed" class="view">
 						<h2>Killfeed</h2>
@@ -83,6 +98,7 @@
 				</div>
 			</div>
 			
+			<!-- This is where the coordiantes box is created -->
 			<p id="set-coordinates" class="view">[ <span id="left-view-pos"></span>, <span id="right-view-pos"></span> ]</p>
 		</div>
     </body>
