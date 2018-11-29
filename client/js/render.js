@@ -30,6 +30,7 @@ function renderBodies(){
         // fill(rgb[0],rgb[1],rgb[2],alpha);
         drawObject(ply.shapeVertices);
         drawThrust(ply);
+        
         pop();
         strokeWeight(10);
         stroke(0,255,0,50);
@@ -176,6 +177,17 @@ function drawThrust(player){
         var numParts = getRandomInt(1, 3);
         for(var i=0; i<numParts; i++){
             player.particles.addParticle(createVector(player.body.position[0]+width/2, player.body.position[1]+height/2), player.body.angle + Math.PI/2);
+        }
+    }
+}
+
+
+// When the player presses the space bar it toggles on the glow
+function drawMagnet(ply, keysDown){
+    // magnetVertecies = [[-8, 8], [0, getRandomInt(16, 22)], [8, 8]];// = [[-8,8], [8,8], [8,-8], [-8.-8]];
+    if(keysDown.space){
+        if(ply != null){
+            strokeWeight(5);
         }
     }
 }

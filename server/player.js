@@ -199,10 +199,19 @@ Player.prototype.updateBody = function() {
                 mag * Math.cos(ply.body.angle - Math.PI / 2),
                 mag * Math.sin(ply.body.angle - Math.PI / 2)
             ]);
+        } else if(ply.keysDown.right) {
+            var mag = -300;
+            ply.thrusting = true;
+            ply.body.applyForce([
+                mag * Math.cos(ply.body.angle - Math.PI / 2),
+                mag * Math.sin(ply.body.angle - Math.PI / 2)
+            ]);
         } else {
             ply.thrusting = false;
         }
-        if(ply.keysDown.right){
+        
+
+        if(ply.keysDown.space){
             ply.dragging = [];
             for(var key in Asteroids){
                 var ast = Asteroids[key];

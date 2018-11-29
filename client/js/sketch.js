@@ -13,7 +13,7 @@ function setup(){
     lastTimeSeconds = 0;
     angleMode(RADIANS);
 
-    keysDown = {left: false, right: false}
+    keysDown = {left: false, space: false, right: false}
 
     createCanvas(window.innerWidth, window.innerHeight);
 }
@@ -33,8 +33,14 @@ function draw(){
     lastTimeSeconds = lastTimeSeconds || timeSeconds;
     var timeSinceLastCall = timeSeconds - lastTimeSeconds;
     gameWorld.step(fixedTimeStep, timeSinceLastCall, maxSubSteps);
-    renderBodies();
-
+    if(username){
+        if(Players[username]){
+            renderBodies(Players[username].rgbColor);
+        }
+    }else{
+        renderBodies([255,255,255]);
+    }
+    
     fill(0);
     strokeWeight(1);
     stroke(255);
@@ -50,6 +56,8 @@ function draw(){
     stroke(0,255,0);
     renderRadar(radarSize, radarPos);
 
+    drawMagnet(Players[username], keysDown);
+    
     if(username){
         if(!Players[username]){ return; }
         var dx = mouseX - width/2;
@@ -65,6 +73,8 @@ function draw(){
 
         tryFace(mouseAng);
         sendKeys();
+
+        drawMagnet(Players[username], keysDown);
         if(keysDown && keysDown.left && Players[username]){
             var mag = 300;
             Players[username].body.applyForce([mag * Math.cos(Players[username].body.angle - Math.PI/2), mag*Math.sin(Players[username].body.angle - Math.PI/2)]);
@@ -73,6 +83,13 @@ function draw(){
     }
 
 }
+
+
+
+
+
+
+
 
 function sendKeys() {
     socket.emit("playerSendKeys", username, keysDown);
@@ -83,17 +100,46 @@ function tryFace(ang){
 }
 
 function mousePressed(){
-    if(mouseButton == "left"){
+    if(mouseButton === LEFT){
         keysDown.left = true;
-    } else if(mouseButton == "right") {
+    }else if(mouseButton === RIGHT) {
         keysDown.right = true;
     }
 }
 
 function mouseReleased(){
-    if(mouseButton == "left"){
+    if(mouseButton === LEFT){
         keysDown.left = false;
-    } else if(mouseButton == "right") {
         keysDown.right = false;
+
+    }else if(mouseButton === RIGHT) {
+        keysDown.right = false;
+        keysDown.left = false;
+
     }
 }
+
+function keyPressed(){
+    if(keyIsDown(32)){
+        keysDown.space = !keysDown.space;
+    }
+}
+
+// function onMouseLeftDown(){
+//     keysDown.left = true;
+// }
+
+
+// function onMouseRightDown(){
+//     alert("Hello");
+//     keysDown.right = true;
+// }
+
+// function onMouseLeftUp(){
+//     keysDown.left = false;
+// }
+
+
+// function onMouseRightUp(){
+//     keysDown.right = false;
+// }
