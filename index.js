@@ -14,6 +14,10 @@ app.get('/', function(req, res) {
     app.use(express.static(__dirname + '/client'));
 });
 
+app.get('/images/favicon.ico', function(req, res) {
+    res.sendFile(__dirname + '/client/favicon.ico');
+});
+
 http.listen(PORT, function() {
     console.log('listening on *:' + PORT);
 });
